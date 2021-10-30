@@ -29,6 +29,6 @@ body {
 }
 
 .wd-dark {
-    background: var(--dark-color);
+    background: #343a40;
     color: #fff;
 }

@@ -4,13 +4,20 @@ import Navbar from "./components/layout/Navbar";
 import Home from "./components/layout/Home";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+
+//Styles
 import './vendors/bootstrap/css/bootstrap.min.css'
 import './vendors/bootstrap/bootstrap.min.css'
 import './vendors/fontawesome/css/all.min.css';
 import './App.css'
 
+//Redux
+import { Provider } from 'react-redux';
+import store from './store';
+
 const App = () => {
   return (
+      <Provider store={store}>
       <Router>
         <Fragment>
             <Navbar />
@@ -23,6 +30,7 @@ const App = () => {
             </section>
         </Fragment>
       </Router>
+      </Provider>
   );
 }
 
