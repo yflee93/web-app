@@ -8,6 +8,12 @@ import Alert from './components/layout/Alert';
 import setAuthToken from './utils/setAuthToken';
 import {loadUser} from "./actions/auth";
 
+
+//Reducers
+import who from "../src/reducers/who";
+import profile from "../src/reducers/profile";
+import movies from "../src/reducers/movies";
+
 //Styles
 import './vendors/bootstrap/css/bootstrap.min.css'
 import './vendors/bootstrap/bootstrap.min.css'
@@ -16,7 +22,12 @@ import './App.css'
 
 //Redux
 import { Provider } from 'react-redux';
-import store from './store';
+/*import store from './store';*/
+import {combineReducers, createStore} from "redux";
+import ProfileScreen from "./components/ProfileScreen";
+
+const reducer = combineReducers({who, profile, movies});
+const store = createStore(reducer);
 
 
 if (localStorage.token) {
@@ -36,6 +47,7 @@ const App = () => {
                 <Switch>
                     <Route exact path="/register" component={Register}/>
                     <Route exact path="/login" component={Login}/>
+                    <Route exact path="/profile" component={ProfileScreen}/>
                 </Switch>
             </section>
         </Fragment>

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "789",
+    "avatarIcon": "../../../images/emilia_avatar.jpeg",
+    "userName": "Emilia Clark",
+    "handle": "emilia_clark",
+    "location": "House of Targaryen",
+    "bio": "I am Emilia Clark."
+  },
+  {
+    "id": "890",
+    "avatarIcon": "../../../images/sansa_avatar.jpeg",
+    "userName": "Sansa Stark",
+    "handle": "sansa_stark",
+    "location": "House of Stark",
+    "bio": "House of Stark"
+  },
+  {
+    "id": "910",
+    "avatarIcon": "../../../images/margery_avatar.jpeg",
+    "userName": "Margaery Tyrell",
+    "handle": "margaery_tyrell",
+    "location": "House of Tyrell",
+    "bio": "House of Tyrell"
+  }
+]

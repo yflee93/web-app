@@ -32,3 +32,67 @@ body {
     background: #343a40;
     color: #fff;
 }
+
+/*profile*/
+.follower-avatar-logo-size {
+    width: 50px;
+    height: 50px;
+}
+
+.profile-avatar-logo-size {
+    width: 100px;
+    height: 100px;
+}
+
+.profile-bottom-container {
+    margin-top: 80px;
+}
+
+.img-fluid.movie-poster {
+    min-height: 150px;
+    min-width: 100px;
+}
+
+.profile-stats-button:focus {
+    border-radius: 25px;
+    border-color: black;
+    background-color: white;
+    color: black;
+    width: 60%;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+/*movie list*/
+.movie-list-bookmark {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.movie-list-description {
+    max-height: 190px;
+    overflow: hidden;
+}
+
+.movie-list-description:hover {
+    overflow: visible;
+}
+
+.movie-list-item-container {
+    position: relative;
+    transition: transform 0.2s;
+}
+
+.movie-list-item-container:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+/*follow list*/
+.follow-list-button:focus {
+    border-radius: 25px;
+    border-color: black;
+    background-color: white;
+    color: black;
+}
