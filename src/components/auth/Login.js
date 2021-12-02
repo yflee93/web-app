@@ -1,7 +1,11 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import {login} from "../../actions/auth";
+import {useDispatch, useSelector} from "react-redux";
 
 const Login = () => {
+    const dispatch = useDispatch();
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -14,10 +18,17 @@ const Login = () => {
         [e.target.name]: e.target.value
     })
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
-        console.log("log in");
+        await login(dispatch, email, password);
     };
+
+    //Redirect if logged in
+    if (isAuthenticated) {
+        return <Redirect to='/home'/>
+    }
+
+
     return (
         <Fragment>
             <h1 className="wd-large text-primary mt-3">Sign In</h1>

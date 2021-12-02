@@ -1,29 +1,42 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
+import {setAlert} from "../../actions/alert";
+import {register} from "../../actions/auth";
+import {useDispatch, useSelector} from "react-redux";
 
 const Register = () => {
+    const dispatch = useDispatch();
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     const [formData, setFormData] = useState({
         name: '',
+        type: 'general',
+        code: '',
         email: '',
         password: '',
         password2: ''
     });
 
-    const { name, email, password, password2} = formData;
+    const { name, type, code, email, password, password2} = formData;
 
-    const onChange = (e) => setFormData({
+    const onChange = (e) => {
+        setFormData({
         ...formData,
         [e.target.name]: e.target.value
-    })
+    })}
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
         if (password !== password2) {
-            console.log("Password do not match");
+            setAlert(dispatch, "Passwords do not match!", "danger");
         }
         else {
-            console.log(formData);
+            await register(dispatch, {name, type, code, email, password});
         }
+    }
+
+    //Redirect if logged in
+    if (isAuthenticated) {
+        return <Redirect to='/home'/>
     }
     return (
         <Fragment>
@@ -42,6 +55,28 @@ const Register = () => {
                            onChange={e => onChange(e)}
                     />
                 </div>
+
+                <div className="form-group">
+                    <label htmlFor="type" className="form-label mt-3">User Type</label>
+                    <select className="form-select" id="type" name="type" onChange={e =>onChange(e)}>
+                        <option value="general">General user</option>
+                        <option value="reviewer">Invited reviewer</option>
+                        <option value="admin">Administrator</option>
+                    </select>
+                </div>
+
+                { (type === "reviewer" || type === "admin") &&
+                    (<div className="form-group">
+                    <label htmlFor="code" className="form-label mt-3">Verification Code</label>
+                    <input type="text"
+                           className="form-control"
+                           id="code"
+                           name="code"
+                           placeholder="Enter Verification Code"
+                           value={code}
+                           onChange={e => onChange(e)}
+                    />
+                </div>)}
 
                 <div className="form-group">
                     <label htmlFor="email" className="form-label mt-3">Email</label>
