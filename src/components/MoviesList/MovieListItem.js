@@ -2,6 +2,7 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteMovie, likeMovie} from "../../services/movieService";
 
+
 const MovieListItem = ({movie}) => {
   const profile = useSelector((state => state.profile))
   const dispatch = useDispatch();
@@ -32,13 +33,23 @@ const MovieListItem = ({movie}) => {
               <img src={poster}
                    alt="movie_poster"
                    className="img-fluid movie-poster"/>
-              {(profile.userType === ("general" || "admin")) ?
-                  <i className="far fa-bookmark movie-list-bookmark"></i> : ''}
+              {(profile.userType === "general") ?
+                  <i className="far fa-bookmark movie-list-bookmark"></i> :
+                  (profile.userType === "reviewer") ?
+                      <i className="far fa-bookmark movie-list-bookmark"></i> :
+                      (profile.userType === "admin") ?
+                          <i className="far fa-bookmark movie-list-bookmark"></i> : ''}
             </div>
             <div className="col-8">
-              {(profile.userType === ("general" || "admin")) ?
+              {(profile.userType === "general") ?
                   <i className="fas fa-times text-white-50 fa-pull-right"
-                     onClick={deleteMovieClickHandler}></i> : ''}
+                     onClick={deleteMovieClickHandler}></i> :
+                  (profile.userType === "reviewer") ?
+                      <i className="fas fa-times text-white-50 fa-pull-right"
+                         onClick={deleteMovieClickHandler}></i> :
+                      (profile.userType === "admin") ?
+                          <i className="fas fa-times text-white-50 fa-pull-right"
+                             onClick={deleteMovieClickHandler}></i> : ''}
               <div className="card-body">
                 <h5 className="card-title">{name}
                   {movie.liked ? (<span className="fs-6 ms-2">

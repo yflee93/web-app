@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import { getCurrentProfile} from "../../services/profileService";
 import EditProfile from "./EditProfile";
 
-const Profile = ({displayMovieList}) => {
+const Profile = (props) => {
   const profiles = useSelector((state => state.profile));
   const dispatch = useDispatch();
 
@@ -49,14 +49,30 @@ const Profile = ({displayMovieList}) => {
                   <hr/>
                   <p className="fw-bold text-white mb-0">About me: </p>
                   <p>{profiles.bio}</p>
-                  {(profiles.userType === ("general" || "admin")) ?
+                  {(profiles.userType === "general") ?
                       <button type="button"
                               className="btn btn-outline-primary rounded-pill float-end me-2"
                               onClick={editProfileHandler}>edit profile</button> :
-                      <button type="button"
-                              className="btn btn-outline-primary rounded-pill mt-4"
-                              onClick={displayMovieList}>See my movies</button>}
-
+                      ((profiles.userType === "reviewer") ?
+                          <button type="button"
+                                  className="btn btn-outline-primary rounded-pill float-end me-2"
+                                  onClick={editProfileHandler}>edit profile</button> :
+                          ((profiles.userType === "admin") ?
+                              <button type="button"
+                                      className="btn btn-outline-primary rounded-pill float-end me-2"
+                                      onClick={editProfileHandler}>edit profile</button> :
+                              <div>
+                                <div>
+                                  <button type="button"
+                                          className="btn btn-outline-primary rounded-pill mt-4"
+                                          onClick={props.displayMovieList}>See my movies</button>
+                                </div>
+                                <div>
+                                  <button type="button"
+                                          className="btn btn-outline-primary rounded-pill mt-4"
+                                  >Follow</button>
+                                </div>
+                              </div>))}
                 </div>
               </div>
             </div>
