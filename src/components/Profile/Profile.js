@@ -1,6 +1,6 @@
 import React, { useEffect, useState }from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { getCurrentProfile} from "../../services/profileService";
+import { getCurrentProfile} from "../../actions/profile";
 import EditProfile from "./EditProfile";
 
 const Profile = (props) => {
@@ -15,22 +15,6 @@ const Profile = (props) => {
   const editProfileHandler = () => {
     setEditProfile(true);
   }
-
-/*
-  const {
-    name,
-    bio,
-    handle,
-    location,
-    profilePicture,
-    movieCount,
-    followingCount,
-    followersCount,
-    bookmarks,
-    reviews,
-    favorites,
-    recommend
-  } = profiles;*/
 
   return (
       <div>

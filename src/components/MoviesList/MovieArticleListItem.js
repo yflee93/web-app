@@ -1,6 +1,6 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {deleteMovie, likeMovie} from "../../services/movieService";
+import {deleteMovie } from "../../services/movieService";
 
 const MovieArticleListItem = ({movie}) => {
   const profile = useSelector((state => state.profile))
@@ -9,8 +9,6 @@ const MovieArticleListItem = ({movie}) => {
   const {
     name,
     poster,
-    year,
-    description
   } = movie;
 
   // delete movies

@@ -43,9 +43,6 @@ const ProfileScreen = () => {
   }
 
 
-  // display different component based on user type
-/*  const userTypes = ["general", "admin", "reviewer"];*/
-
   return (
       <div className="row mt-2">
         <div className="col-5 col-md-5 col-lg-3">
@@ -87,6 +84,6 @@ const ProfileScreen = () => {
         </div>
       </div>
   )
-}
+};
 
 export default ProfileScreen;

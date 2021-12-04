@@ -22,12 +22,8 @@ import './App.css'
 
 //Redux
 import { Provider } from 'react-redux';
-/*import store from './store';*/
-import {combineReducers, createStore} from "redux";
+import store from './store';
 import ProfileScreen from "./components/ProfileScreen";
-
-const reducer = combineReducers({who, profile, movies});
-const store = createStore(reducer);
 
 
 if (localStorage.token) {
@@ -35,7 +31,7 @@ if (localStorage.token) {
 }
 
 const App = () => {
-    useEffect(()=> loadUser(store.dispatch), []);
+    useEffect(async ()=> await loadUser(store.dispatch), []);
   return (
       <Provider store={store}>
       <Router>
