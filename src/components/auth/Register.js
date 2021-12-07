@@ -5,6 +5,7 @@ import {register} from "../../actions/auth";
 import {useDispatch, useSelector} from "react-redux";
 
 const Register = () => {
+    console.log("call register");
     const dispatch = useDispatch();
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     const [formData, setFormData] = useState({

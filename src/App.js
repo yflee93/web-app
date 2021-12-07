@@ -7,6 +7,7 @@ import Login from "./components/auth/Login";
 import Alert from './components/layout/Alert';
 import setAuthToken from './utils/setAuthToken';
 import {loadUser} from "./actions/auth";
+import MovieDetail from "./components/movieDetail";
 
 //Styles
 import './vendors/bootstrap/css/bootstrap.min.css'
@@ -28,14 +29,23 @@ const App = () => {
   return (
       <Provider store={store}>
       <Router>
-        <Fragment>
+          <Fragment>
             <Navbar />
-            <Route exact path={["/", "/home"]} component={Home}/>
+            <Route exact={true} path={["/", "/home"]} component={Home}/>
             <section className="container">
                 <Alert/>
                 <Switch>
-                    <Route exact path="/register" component={Register}/>
-                    <Route exact path="/login" component={Login}/>
+                    <Route exact={true} path="/register" component={Register}/>
+                    <Route exact={true} path="/login" component={Login}/>
+                    {/*<Route exact path="/itemDetail" component={MovieDetail}/>*/}
+                    <Route exact={true} path="/details/:movieId"
+                        render={(props)=> {
+                                    // console.log("props.match.params.movieId:");
+                                    // console.log(props.match.params.movieId);
+                                    return <MovieDetail movieId={props.match.params.movieId}/>;
+                                }
+                        }
+                    />
                 </Switch>
             </section>
         </Fragment>

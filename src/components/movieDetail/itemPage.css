@@ -1,0 +1,74 @@
+.greydiv {
+
+    /*background-image: url("https://upload.wikimedia.org/wikipedia/en/d/dc/Home_Sweet_Home_Alone_Poster.jpg");*/
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
+}
+
+.titlediv {
+    color: lightgrey;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.subtitlediv {
+    color: lightgrey;
+    font-size: 15px;
+}
+
+.introtitlediv {
+    font-weight: 800;
+    line-height: 20px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 6px;
+    margin-top: 4px;
+}
+.introtitlediv::before {
+    background-color: #2a9fd6;
+    content: ' ';
+    min-width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 0;
+}
+.introtitlediv::after {
+    content: ' ';
+    position: absolute;
+    margin-left: 11px;
+    width: 100%;
+    background-color: #2a9fd6;
+    min-width: 20px;
+    height: 20px;
+}
+
+.seconddiv {
+    border-top-color: white;
+    border-top-style: solid;
+    border-top-width: thin;
+}
+
+div.scrollmenu {
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+div.scrollmenu a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+    background-color: #777;
+}
+
+.actorcarddiv {
+    font-size: 15px;
+    white-space: initial;
+}
