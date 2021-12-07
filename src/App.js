@@ -5,8 +5,12 @@ import Home from "./components/layout/Home";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Alert from './components/layout/Alert';
+import Profile from "./components/profile/Profile";
+
+//Authentication
 import setAuthToken from './utils/setAuthToken';
 import {loadUser} from "./actions/auth";
+import {getCurrentProfile} from "./actions/profile";
 
 //Styles
 import './vendors/bootstrap/css/bootstrap.min.css'
@@ -19,12 +23,17 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 
+
+
 if (localStorage.token) {
     setAuthToken(localStorage.token);
 }
 
 const App = () => {
-    useEffect(()=> loadUser(store.dispatch), []);
+    useEffect(()=> {
+        loadUser(store.dispatch);
+        getCurrentProfile(store.dispatch);
+    }, []);
   return (
       <Provider store={store}>
       <Router>
@@ -36,6 +45,7 @@ const App = () => {
                 <Switch>
                     <Route exact path="/register" component={Register}/>
                     <Route exact path="/login" component={Login}/>
+                    <Route exact path="/profile" component={Profile}/>
                 </Switch>
             </section>
         </Fragment>

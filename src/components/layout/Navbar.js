@@ -15,7 +15,13 @@ const Navbar = () => {
                 </a>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="#!">Privacy Content</a>
+                <Link to="/profile" className="nav-link">
+                    <i className="fas fa-user-circle"/> {' '}
+                    Profile
+                </Link>
+            </li>
+            <li className="nav-item">
+                <a className="nav-link" href="#">Privacy Content</a>
             </li>
         </ul>
     );
@@ -28,7 +34,7 @@ const Navbar = () => {
                 <Link to="/register" className="nav-link">Register</Link>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="#!">Privacy Content</a>
+                <a className="nav-link" href="#">Privacy Content</a>
             </li>
         </ul>
     );
@@ -36,7 +42,7 @@ const Navbar = () => {
         <nav className="navbar navbar-expand navbar-dark wd-dark">
             <div className="container-fluid row">
                 <div className="col-3">
-                    <Link to="/" className="navbar-brand"><i className="fas fa-home"></i>&#160;APP</Link>
+                    <Link to="/" className="navbar-brand"><i className="fas fa-home"/>&#160;Home</Link>
                 </div>
 
                 <div className="col-9">

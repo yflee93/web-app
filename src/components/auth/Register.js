@@ -36,7 +36,7 @@ const Register = () => {
 
     //Redirect if logged in
     if (isAuthenticated) {
-        return <Redirect to='/home'/>
+        return <Redirect to='/profile'/>
     }
     return (
         <Fragment>
