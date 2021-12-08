@@ -1,19 +1,26 @@
-import React, {useState} from "react";
+import React from "react";
 import ReactStars from "react-rating-stars-component";
-import {useDispatch, useSelector} from "react-redux";
-
+import {useDispatch} from "react-redux";
+import {deleteReview} from "../../../actions/review";
 
 const ReviewListItem = ({review}) => {
+    const {_id, author} = review
+    const dispatch = useDispatch();
+    const deleteReviewClickHandler = () => {
+        deleteReview(dispatch, _id, 1, author);
+    }
     return (
         <li className="list-group-item">
             <div className="card mb-3">
                 <div className="row g-0">
                     <div className="col-4">
-                        <img src={review.uri}
+                        <img src={review.poster}
                              alt="movie_poster"
                              className="img-fluid movie-poster"/>
                     </div>
                     <div className="col-8">
+                        <i className="fas fa-times text-white-50 fa-pull-right"
+                           onClick={deleteReviewClickHandler} />
                         <div className="card-body">
                             <h5 className="card-title">{review.title}</h5>
                             <div>

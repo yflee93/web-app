@@ -1,15 +1,19 @@
-import React, {useEffect } from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React from "react";
+import {useSelector} from "react-redux";
 import ReviewListItem from "./ReviewListItem";
 
 const ReviewList = () => {
+    const {profiles} = useSelector(state => state.profile);
+    if (profiles == null) {
+        return null;
+    }
+    const {reviews} = profiles;
     return (
         <div>
             <ul className="list-group">
                 {
-                    [{uri: 'https://image.tmdb.org/t/p/w500/2U3LSaZtMk1HFDFhIgpx7idOVk7.jpg', title: 'Titanic', rating:3.6, content:"Hi"},
-                        {uri: 'https://image.tmdb.org/t/p/w500//fZ0rzH83nprexRjNn9IQBVDq5rf.jpg', title: 'Titanic2', rating:2.3, content:"I love it"}].map((review, idx) =>
-                        <ReviewListItem key={idx} review={review}/>)
+                    reviews && reviews.length > 0 && reviews.map(review =>
+                        <ReviewListItem key={review._id} review={review}/>)
                 }
             </ul>
         </div>

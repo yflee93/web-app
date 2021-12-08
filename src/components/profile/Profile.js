@@ -20,15 +20,12 @@ const Profile = () => {
     }, [profiles]);
     return (
         <div className="row mt-4">
-            <div className="col-5 col-md-5 col-lg-3">
+            <div className="col-4">
                 <BasicInformation/>
                 <CollectionStats toggle={toggleScreen} screen={showWhichScreen}/>
             </div>
-            <div className="col-7 col-md-7 col-lg-6 col-xl-6 mt-n2">
+            <div className="col-8 mt-n2">
                 <MoviesInfo screen={showWhichScreen}/>
-            </div>
-            <div className="d-none d-sm-none d-md-none d-lg-block col-lg-3 col-xl-3">
-                Right
             </div>
         </div>
     )

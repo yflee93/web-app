@@ -1,11 +1,23 @@
-import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {getMovie} from "../../../actions/collection";
+import React from "react";
+import {useSelector} from "react-redux";
+import ArticleListItem from "./ArticleListItem";
 
 const ArticleList = () => {
+    const {profiles} = useSelector(state => state.profile);
+    if (profiles == null) {
+        return null;
+    }
+    const {articles} = profiles;
     return (
-        <p>Article</p>
-    );
+        <div>
+            <ul className="list-group">
+                {
+                    articles && articles.length > 0 && articles.map(article =>
+                        <ArticleListItem key={article._id} article={article}/>)
+                }
+            </ul>
+        </div>
+    )
 }
 
 export default ArticleList;
