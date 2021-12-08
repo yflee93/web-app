@@ -6,22 +6,27 @@ import {
     AUTH_ERROR,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    LOGOUT
+    LOGOUT,
+    CLEAR_PROFILE
 } from "./constant";
 import {setAlert} from "./alert";
 import setAuthToken from "../utils/setAuthToken";
+import {getCurrentProfile} from "./profile";
 
+const AUTH_URI = 'http://localhost:4000/api/auth';
+const USER_URI = 'http://localhost:4000/api/users';
 
 //Load User
 export const loadUser = async (dispatch) => {
     //Login and register will create a new json web token in localStorage, if jwt is found,
     //we add this token to axios headers by calling setAuthToken();
+    console.log("loadUser");
     if (localStorage.token) {
         console.log("load called");
         setAuthToken(localStorage.token);
     }
     try {
-        const res = await axios.get('http://localhost:4000/api/auth');
+        const res = await axios.get(AUTH_URI);
         dispatch({
             type: USER_LOADED,
             payload: res.data
@@ -45,12 +50,13 @@ export const register = async (dispatch, {name, type, code, email, password}) =>
     const body = JSON.stringify({name, type, code, email, password});
 
     try {
-        const res = await axios.post('http://localhost:4000/api/users', body, config);
+        const res = await axios.post(USER_URI, body, config);
         dispatch({
             type: REGISTER_SUCCESS,
             payload: res.data
         })
         await loadUser(dispatch);
+        await getCurrentProfile(dispatch);
     }
     catch (err) {
         const errors = err.response.data.errors;
@@ -74,13 +80,13 @@ export const login = async (dispatch, email, password) => {
     const body = JSON.stringify({email, password});
 
     try {
-        const res = await axios.post('http://localhost:4000/api/auth', body, config);
-        console.log("Login called");
+        const res = await axios.post(AUTH_URI, body, config);
         dispatch({
             type: LOGIN_SUCCESS,
             payload: res.data
         });
         await loadUser(dispatch);
+        await getCurrentProfile(dispatch);
     }
     catch (err) {
         const errors = err.response.data.errors;
@@ -97,6 +103,9 @@ export const login = async (dispatch, email, password) => {
 export const logout = async (dispatch) => {
     dispatch({
         type: LOGOUT
+    });
+    dispatch({
+        type: CLEAR_PROFILE
     });
 }
 
