@@ -26,7 +26,7 @@ export const updateCurrentProfile = async (dispatch, {bio, name, location}) => {
     const config = {
         headers: {
             'Content-Type': 'application/json'
-        },
+        }
     }
 
     const body = JSON.stringify({name, bio, location});

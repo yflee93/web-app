@@ -1,12 +1,17 @@
 import React from "react";
 import "./itemPage.css";
 import exampleMovieDetail from "./exampleMovieDetail.json";
+import ReactStars from "react-rating-stars-component";
 
 // import {Link} from "react-router-dom";
 
-const IMAGE_BASE_PATH_POSTER = 'https://image.tmdb.org/t/p/w300'
-const IMAGE_BASE_PATH_ACTOR = 'https://image.tmdb.org/t/p/w300'
-const IMAGE_BASE_PATH_BACKDROP = 'https://image.tmdb.org/t/p/original'
+const IMAGE_BASE_PATH_POSTER = 'https://image.tmdb.org/t/p/w300';
+const IMAGE_BASE_PATH_ACTOR = 'https://image.tmdb.org/t/p/w300';
+const IMAGE_BASE_PATH_BACKDROP = 'https://image.tmdb.org/t/p/original';
+
+const ratingChanged = (newRating) => {
+    console.log(newRating);
+};
 
 const MovieDetailItem = ({movieDetail = {exampleMovieDetail}}) => {
     if (movieDetail){
@@ -202,22 +207,20 @@ const MovieDetailItem = ({movieDetail = {exampleMovieDetail}}) => {
                             </div>
                         </div>
                     </div>
-                    {/*<div className="col-10">*/}
-                    {/*    <div className="row"><textarea placeholder="What's Happening" className="wd-inputtextarea"*/}
-                    {/*                                   spellCheck="false" style={{"width": "95%"}}></textarea></div>*/}
-                    {/*    <div className="row mt-2">*/}
-                    {/*        <div className="col-3">*/}
-                    {/*            <button type="button"*/}
-                    {/*                    className="btn btn-primary btn-block override-button-tweet mt-2 blue-button"*/}
-                    {/*                    style={{"width": "90%"}}>Tweet*/}
-                    {/*            </button>*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
                     <div className="row mt-4">
                         <div className="introtitlediv ps-4">
                             WRITE REVIEW
                         </div>
+                        <ReactStars
+                            count={5}
+                            onChange={ratingChanged}
+                            size={24}
+                            isHalf={true}
+                            emptyIcon={<i className="far fa-star"></i>}
+                            halfIcon={<i className="fa fa-star-half-alt"></i>}
+                            filledIcon={<i className="fa fa-star"></i>}
+                            activeColor="#ffd700"
+                        />
                         <div className="row">
                             <textarea placeholder="Wirte your review here!" className="mt-3 mb-3"
                                                        spellCheck="false" style={{"width": "100%"}}>
