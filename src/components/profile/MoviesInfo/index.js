@@ -1,16 +1,15 @@
-import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React from "react";
 import MovieList from "./MovieList";
 import ReviewList from "./ReviewList";
 import ArticleList from "./ArticleList";
 
-const MoviesInfo = ({screen}) => {
+const MoviesInfo = ({screen, owns}) => {
     return (
         <div>
             {(screen === 'favorite' ||  screen === 'bookmark' || screen === 'recommend') &&
-            <MovieList screen={screen}/>}
-            {screen === 'review' && <ReviewList/>}
-            {screen === 'article' && <ArticleList/>}
+            <MovieList screen={screen} owns={owns}/>}
+            {screen === 'review' && <ReviewList owns={owns}/>}
+            {screen === 'article' && <ArticleList owns={owns}/>}
         </div>
     )
 

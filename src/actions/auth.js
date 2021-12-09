@@ -20,9 +20,7 @@ const USER_URI = 'http://localhost:4000/api/users';
 export const loadUser = async (dispatch) => {
     //Login and register will create a new json web token in localStorage, if jwt is found,
     //we add this token to axios headers by calling setAuthToken();
-    console.log("loadUser");
     if (localStorage.token) {
-        console.log("load called");
         setAuthToken(localStorage.token);
     }
     try {
@@ -56,7 +54,6 @@ export const register = async (dispatch, {name, type, code, email, password}) =>
             payload: res.data
         })
         await loadUser(dispatch);
-        await getCurrentProfile(dispatch);
     }
     catch (err) {
         const errors = err.response.data.errors;
@@ -86,7 +83,6 @@ export const login = async (dispatch, email, password) => {
             payload: res.data
         });
         await loadUser(dispatch);
-        await getCurrentProfile(dispatch);
     }
     catch (err) {
         const errors = err.response.data.errors;
@@ -103,9 +99,6 @@ export const login = async (dispatch, email, password) => {
 export const logout = async (dispatch) => {
     dispatch({
         type: LOGOUT
-    });
-    dispatch({
-        type: CLEAR_PROFILE
     });
 }
 

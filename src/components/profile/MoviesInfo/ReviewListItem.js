@@ -1,10 +1,11 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {deleteReview} from "../../../actions/review";
 
-const ReviewListItem = ({review}) => {
-    const {_id, author} = review
+const ReviewListItem = ({review, owns}) => {
+    const {_id, author} = review;
+    const {user} = useSelector(state => state.auth);
     const dispatch = useDispatch();
     const deleteReviewClickHandler = () => {
         deleteReview(dispatch, _id, 1, author);
@@ -19,8 +20,13 @@ const ReviewListItem = ({review}) => {
                              className="img-fluid movie-poster"/>
                     </div>
                     <div className="col-8">
-                        <i className="fas fa-times text-white-50 fa-pull-right"
-                           onClick={deleteReviewClickHandler} />
+                        {
+                            (owns || (user && user.type === 'admin')) && (
+                                <i className="fas fa-times text-white-50 fa-pull-right"
+                                   onClick={deleteReviewClickHandler} />
+                            )
+                        }
+
                         <div className="card-body">
                             <h5 className="card-title">{review.title}</h5>
                             <div>

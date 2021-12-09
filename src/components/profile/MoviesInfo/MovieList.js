@@ -2,7 +2,7 @@ import React from "react";
 import MovieListItem from "./MovieListItem";
 import {useSelector} from "react-redux";
 
-const MovieList = ({screen}) => {
+const MovieList = ({screen, owns}) => {
     const {favorites, bookmarks, recommends} = useSelector(state => state.collection);
     let displayCollections;
     switch (screen) {
@@ -23,7 +23,7 @@ const MovieList = ({screen}) => {
             <ul className="list-group">
                 {
                     displayCollections.map((movie, idx) =>
-                        <MovieListItem key={idx} movie={movie} screen={screen}/>)
+                        <MovieListItem key={idx} movie={movie} screen={screen} owns={owns}/>)
                 }
             </ul>
         </div>

@@ -1,5 +1,5 @@
-import React, { Fragment, useState } from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import React, { useState } from 'react';
+import {Link, Navigate} from 'react-router-dom';
 import {setAlert} from "../../actions/alert";
 import {register} from "../../actions/auth";
 import {useDispatch, useSelector} from "react-redux";
@@ -36,10 +36,10 @@ const Register = () => {
 
     //Redirect if logged in
     if (isAuthenticated) {
-        return <Redirect to='/profile'/>
+        return <Navigate to='/profile'/>
     }
     return (
-        <Fragment>
+        <section className="container">
             <h1 className="wd-large text-primary mt-3">Sign Up</h1>
             <p className="wd-lead"><i className="fas fa-user"></i> Create Your Account</p>
             <form className="form" onSubmit={e=>onSubmit(e)}>
@@ -123,7 +123,7 @@ const Register = () => {
             <p className="my-3">
                 Already have an account? <Link to="/login">Sign In</Link>
             </p>
-        </Fragment>
+        </section>
     );
 }
 

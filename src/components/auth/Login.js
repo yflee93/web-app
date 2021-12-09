@@ -1,11 +1,12 @@
-import React, { Fragment, useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import { Link, Navigate } from 'react-router-dom';
 import {login} from "../../actions/auth";
 import {useDispatch, useSelector} from "react-redux";
 
 const Login = () => {
     const dispatch = useDispatch();
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -25,12 +26,12 @@ const Login = () => {
 
     //Redirect if logged in
     if (isAuthenticated) {
-        return <Redirect to='/profile'/>
+        return <Navigate to='/profile'/>
     }
 
 
     return (
-        <Fragment>
+        <section className="container">
             <h1 className="wd-large text-primary mt-3">Sign In</h1>
             <p className="wd-lead"><i className="fas fa-user"></i> Sign Into Your Account</p>
             <form className="form" onSubmit={e=>onSubmit(e)}>
@@ -66,7 +67,7 @@ const Login = () => {
             <p className="my-3">
                 Don't have an account yet? <Link to="/register">Sign Up</Link>
             </p>
-        </Fragment>
+        </section>
     );
 }
 

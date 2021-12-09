@@ -1,10 +1,11 @@
 import React from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {deleteArticle} from "../../../actions/article";
 
-const ArticleListItem = ({article}) => {
+const ArticleListItem = ({article, owns}) => {
     const {_id, author} = article
     const dispatch = useDispatch();
+    const {user} = useSelector(state => state.auth);
     const deleteArticleClickHandler = () => {
         deleteArticle(dispatch, _id, 1, author);
     }
@@ -18,8 +19,13 @@ const ArticleListItem = ({article}) => {
                              className="img-fluid movie-poster"/>
                     </div>
                     <div className="col-8">
-                        <i className="fas fa-times text-white-50 fa-pull-right"
-                           onClick={deleteArticleClickHandler} />
+                        {
+                            (owns || (user && user.type === 'admin')) && (
+                                <i className="fas fa-times text-white-50 fa-pull-right"
+                                   onClick={deleteArticleClickHandler} />
+                            )
+                        }
+
                         <div className="card-body">
                             <h5 className="card-title">{article.title}</h5>
                             <p>{article.content}</p>

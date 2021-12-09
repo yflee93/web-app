@@ -1,5 +1,6 @@
 import {
     GET_CURRENT_PROFILE,
+    GET_OTHER_PROFILE,
     PROFILE_ERROR,
     EDIT_PROFILE,
     CLEAR_PROFILE,
@@ -18,6 +19,7 @@ const profile = (state= initialState, action) => {
 
     switch (type) {
         case GET_CURRENT_PROFILE:
+        case GET_OTHER_PROFILE:
         case EDIT_PROFILE:
             return {
                 ...state,

@@ -90,9 +90,10 @@ export const fetchCollections = async (dispatch, favorite, bookmark, recommend) 
     }
 };
 
-export const deleteCollection = async (dispatch, id, screen) => {
+export const deleteCollection = async (dispatch, id, screen, author_id) => {
     try {
-        const res = await axios.delete(`${URI}/${id}/${screen}`);
+        const res = await axios.delete(`${URI}/${id}/${screen}/${author_id}`);
+
         dispatch({
             type: EDIT_PROFILE,
             payload: res.data

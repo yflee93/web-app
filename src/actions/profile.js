@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {
     GET_CURRENT_PROFILE,
+    GET_OTHER_PROFILE,
     PROFILE_ERROR,
     EDIT_PROFILE,
 } from "./constant";
@@ -44,3 +45,19 @@ export const updateCurrentProfile = async (dispatch, {bio, name, location}) => {
         })
     }
 };
+
+
+export const getProfileById = async (dispatch, id) => {
+    try {
+        const res = await axios.get(`${URI}/${id}`);
+        dispatch({
+            type: GET_OTHER_PROFILE,
+            payload: res.data
+        })
+    } catch(err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+}
