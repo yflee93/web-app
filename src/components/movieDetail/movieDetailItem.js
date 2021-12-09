@@ -1,7 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./itemPage.css";
 import exampleMovieDetail from "./exampleMovieDetail.json";
 import ReactStars from "react-rating-stars-component";
+import {useDispatch, useSelector} from "react-redux";
+import {getCurrentProfile} from "../../actions/profile";
+import {deleteCollection, addCollection} from "../../actions/collection";
 
 // import {Link} from "react-router-dom";
 
@@ -14,7 +17,26 @@ const ratingChanged = (newRating) => {
 };
 
 const MovieDetailItem = ({movieDetail = {exampleMovieDetail}}) => {
-    if (movieDetail){
+    const {profiles} = useSelector(state => state.profile);
+    const dispatch = useDispatch();
+    useEffect( ()=>{
+        getCurrentProfile(dispatch);
+    }, [dispatch]);
+    if (movieDetail && profiles){
+        // console.log("profiles");
+        // console.log(profiles);
+        const isFavorite = (profiles.movieCollections.favorites.findIndex((id) => id == movieDetail.id) !== -1);
+        const isBookmark = (profiles.movieCollections.bookmarks.findIndex((id) => id == movieDetail.id) !== -1);
+        const isRecommend = (profiles.movieCollections.recommends.findIndex((id) => id == movieDetail.id) !== -1);
+        const updateCollectionClickHandler = (collection, isEnabled) => {
+            if (isEnabled) {
+                deleteCollection(dispatch, movieDetail.id, collection, profiles.user._id);
+            }
+            else {
+                addCollection(dispatch, movieDetail.id, collection, profiles.user._id);
+            }
+
+        }
         return (
             <>
                 <div className="container-fluid ps-4 pe-4">
@@ -44,9 +66,38 @@ const MovieDetailItem = ({movieDetail = {exampleMovieDetail}}) => {
                                     <p className="mt-0">{movieDetail.popularity}</p>
                                 </div>
                             </div>
-                            <div className="row pt-4">
-                                <i className="far fa-heart ps-0"> Like </i>
-                                <i className="far fa-bookmark mt-3 ps-0"> WatchList </i>
+                            <div className="row pt-4" onClick={() => updateCollectionClickHandler("favorite", isFavorite)}>
+                            {/*<div className="row pt-4">*/}
+                                {
+                                    isFavorite &&
+                                    <i className="fas fa-heart ps-0" style={{"color": isFavorite ? "red" : "white"}}> Like </i>
+                                }
+                                {
+                                    !isFavorite &&
+                                    <i className="far fa-heart ps-0"> Like </i>
+                                }
+                            </div>
+                            <div className="row" onClick={() => updateCollectionClickHandler("bookmark", isBookmark)}>
+                            {/*<div className="row">*/}
+                            {
+                                    isBookmark &&
+                                    <i className="fas fa-bookmark mt-3 ps-0" style={{"color": isBookmark ? "yellow" : "white"}}> WatchList </i>
+                                }
+                                {
+                                    !isBookmark &&
+                                    <i className="far fa-bookmark mt-3 ps-0"> WatchList </i>
+                                }
+                            </div>
+                            <div className="row" onClick={() => updateCollectionClickHandler("recommend", isRecommend)}>
+                            {/*<div className="row">*/}
+                            {
+                                    isRecommend &&
+                                    <i className="fas fa-thumbs-up mt-3 ps-0" style={{"color": isRecommend ? "yellow" : "white"}}> Recommend </i>
+                                }
+                                {
+                                    !isRecommend &&
+                                    <i className="far fa-thumbs-up mt-3 ps-0"> Recommend </i>
+                                }
                             </div>
                         </div>
                     </div>
@@ -243,6 +294,11 @@ const MovieDetailItem = ({movieDetail = {exampleMovieDetail}}) => {
                     </div>
                 </div>
             </>
+        );
+    }
+    else {
+        return (
+            <></>
         );
     }
 }

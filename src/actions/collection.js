@@ -89,7 +89,28 @@ export const fetchCollections = async (dispatch, favorite, bookmark, recommend) 
 
 export const deleteCollection = async (dispatch, id, screen, author_id) => {
     try {
+        console.log(id);
+        console.log(screen);
+        console.log(author_id);
         const res = await axios.delete(`${URI}/${id}/${screen}/${author_id}`);
+        console.log("res.data");
+        console.log(res.data);
+        dispatch({
+            type: EDIT_PROFILE,
+            payload: res.data
+        });
+    }
+    catch(err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+};
+
+export const addCollection = async (dispatch, id, screen, author_id) => {
+    try {
+        const res = await axios.post(`${URI}/${id}/${screen}/${author_id}`);
 
         dispatch({
             type: EDIT_PROFILE,

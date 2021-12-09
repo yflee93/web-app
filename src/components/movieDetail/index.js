@@ -2,16 +2,17 @@ import React, {useEffect} from "react";
 import MovieDetailItem from "./movieDetailItem";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchMovieDetail} from "../../service/movieDetailService";
+import {useParams} from "react-router";
 
 const selectMovieDetail = (state) => state.moviedetail;
 
-const MovieDetail = ({movieId}) => {
+const MovieDetail = () => {
     console.log("call it");
-    let curMovieId = movieId;
+    const {movieId} = useParams();
     const movieDetail = useSelector(selectMovieDetail);
     const dispatch = useDispatch();
-    const func = () => fetchMovieDetail(dispatch, curMovieId);
-    useEffect(func, [dispatch, curMovieId]);
+    const func = () => fetchMovieDetail(dispatch, movieId);
+    useEffect(func, [dispatch, movieId]);
     return (
         <>
             <MovieDetailItem movieDetail={movieDetail}/>

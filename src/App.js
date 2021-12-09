@@ -37,29 +37,6 @@ const App = () => {
   return (
       <Provider store={store}>
       <Router>
-{/*<<<<<<< HEAD*/}
-{/*          <Fragment>*/}
-{/*            <Navbar />*/}
-{/*            <Route exact={true} path={["/", "/home"]} component={Home}/>*/}
-{/*            <section className="container">*/}
-{/*                <Alert/>*/}
-{/*                <Switch>*/}
-{/*                    <Route exact={true} path="/register" component={Register}/>*/}
-{/*                    <Route exact={true} path="/login" component={Login}/>*/}
-{/*                    /!*<Route exact path="/itemDetail" component={MovieDetail}/>*!/*/}
-{/*                    <Route exact={true} path="/details/:movieId"*/}
-{/*                        render={(props)=> {*/}
-{/*                                    // console.log("props.match.params.movieId:");*/}
-{/*                                    // console.log(props.match.params.movieId);*/}
-{/*                                    return <MovieDetail movieId={props.match.params.movieId}/>;*/}
-{/*                                }*/}
-{/*                        }*/}
-{/*                    />*/}
-{/*                    <Route exact path="/profile" component={Profile}/>*/}
-{/*                </Switch>*/}
-{/*            </section>*/}
-{/*        </Fragment>*/}
-{/*=======*/}
             <Navbar />
             <Alert />
             <Routes>
@@ -69,14 +46,8 @@ const App = () => {
                 <Route path="login" element={<Login />}/>
                 <Route path="profile/:id" element={<OtherProfile />}/>
                 <Route path="profile" element={<Profile/>}/>
-                <Route exact={true} path="/details/:movieId"
-                       render={(props)=> {
-                           return <MovieDetail movieId={props.match.params.movieId}/>;
-                            }
-                       }
-                />
+                <Route exact={true} path="/details/:movieId" element={<MovieDetail />}/>
             </Routes>
-{/*>>>>>>> auth*/}
       </Router>
       </Provider>
   );
