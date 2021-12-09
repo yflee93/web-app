@@ -9,7 +9,9 @@ const Navbar = () => {
     const authLinks = (
         <ul className="navbar-nav float-end">
             <li className="nav-item">
-                <a onClick={() =>logout(dispatch)} className="nav-link">
+                <a onClick={() => {
+                    logout(dispatch);
+                }} className="nav-link">
                     <i className="fas fa-sign-out-alt"/> {' '}
                     Logout
                 </a>

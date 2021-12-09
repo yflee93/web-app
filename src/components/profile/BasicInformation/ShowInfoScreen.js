@@ -2,7 +2,7 @@ import React from "react";
 import {useSelector} from "react-redux";
 import {Link} from 'react-router-dom'
 
-const ShowInfoScreen = ({toggle}) => {
+const ShowInfoScreen = ({toggle, owns}) => {
     const {profiles} = useSelector(state => state.profile);
     const {isAuthenticated} = useSelector(state => state.auth);
 
@@ -17,10 +17,10 @@ const ShowInfoScreen = ({toggle}) => {
         </div>
     );
 
-    let nullProfileComponent = (
-        <div className="card">
+    let nullProfileComponent = owns ?
+        (<div className="card">
             <div className="card-body">
-                <p>No profile yet, create your profile</p>
+                <p>No profile yet, create your profile!</p>
                 <div className="text-center mt-3">
                     <button type="button"
                             className="btn btn-outline-primary rounded-pill"
@@ -28,10 +28,15 @@ const ShowInfoScreen = ({toggle}) => {
                     </button>
                 </div>
             </div>
-        </div>
-    );
+        </div>):
+        (<div className="card">
+            <div className="card-body">
+                <p>This user has not created a profile.</p>
+            </div>
+        </div>);
 
-    if (!isAuthenticated) {
+
+    if (!isAuthenticated && owns) {
         return noAuthComponent;
     }
 
@@ -45,16 +50,21 @@ const ShowInfoScreen = ({toggle}) => {
                  className="card-img-top profile-avatar-logo-size rounded-pill mt-4 mx-auto"/>
             <div className="card-body">
                 <h5 className="card-title text-center">{profiles.user.name}</h5>
+                <p className="card-text text-center mt-2">
+                    <i className="fas fa-user"/> {profiles.user.type}</p>
+                {owns &&
+                <p className="card-text text-center">
+                    <i className="fas fa-envelope"/> {profiles.user.email}</p>}
                 <p className="card-text text-center">
                     <i className="fas fa-map-marker-alt"/> {profiles.location}</p>
                 <hr/>
                 <p className="text-center">{profiles.bio}</p>
-                <div className="text-center mt-3">
+                {owns && (<div className="text-center mt-3">
                     <button type="button"
                             className="btn btn-outline-primary rounded-pill"
                             onClick={toggle}>Edit Profile
                     </button>
-                </div>
+                </div>)}
             </div>
         </div>);
     }

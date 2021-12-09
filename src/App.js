@@ -1,17 +1,20 @@
-import React, {Fragment, useEffect} from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import React, {useEffect} from 'react';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Navbar from "./components/layout/Navbar";
-import Home from "./components/layout/Home";
+import Home from "./components/home/Home";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Alert from './components/layout/Alert';
 import Profile from "./components/profile/Profile";
+import OtherProfile from './components/profile/OtherProfile';
 
 //Authentication
 import setAuthToken from './utils/setAuthToken';
 import {loadUser} from "./actions/auth";
+
 import MovieDetail from "./components/movieDetail";
 import {getCurrentProfile} from "./actions/profile";
+
 
 //Styles
 import './vendors/bootstrap/css/bootstrap.min.css'
@@ -23,42 +26,57 @@ import './App.css'
 import { Provider } from 'react-redux';
 import store from './store';
 
-
-
-
 if (localStorage.token) {
     setAuthToken(localStorage.token);
 }
 
 const App = () => {
     useEffect(()=> {
-        loadUser(store.dispatch);
-        getCurrentProfile(store.dispatch);
+         loadUser(store.dispatch);
     }, []);
   return (
       <Provider store={store}>
       <Router>
-          <Fragment>
+{/*<<<<<<< HEAD*/}
+{/*          <Fragment>*/}
+{/*            <Navbar />*/}
+{/*            <Route exact={true} path={["/", "/home"]} component={Home}/>*/}
+{/*            <section className="container">*/}
+{/*                <Alert/>*/}
+{/*                <Switch>*/}
+{/*                    <Route exact={true} path="/register" component={Register}/>*/}
+{/*                    <Route exact={true} path="/login" component={Login}/>*/}
+{/*                    /!*<Route exact path="/itemDetail" component={MovieDetail}/>*!/*/}
+{/*                    <Route exact={true} path="/details/:movieId"*/}
+{/*                        render={(props)=> {*/}
+{/*                                    // console.log("props.match.params.movieId:");*/}
+{/*                                    // console.log(props.match.params.movieId);*/}
+{/*                                    return <MovieDetail movieId={props.match.params.movieId}/>;*/}
+{/*                                }*/}
+{/*                        }*/}
+{/*                    />*/}
+{/*                    <Route exact path="/profile" component={Profile}/>*/}
+{/*                </Switch>*/}
+{/*            </section>*/}
+{/*        </Fragment>*/}
+{/*=======*/}
             <Navbar />
-            <Route exact={true} path={["/", "/home"]} component={Home}/>
-            <section className="container">
-                <Alert/>
-                <Switch>
-                    <Route exact={true} path="/register" component={Register}/>
-                    <Route exact={true} path="/login" component={Login}/>
-                    {/*<Route exact path="/itemDetail" component={MovieDetail}/>*/}
-                    <Route exact={true} path="/details/:movieId"
-                        render={(props)=> {
-                                    // console.log("props.match.params.movieId:");
-                                    // console.log(props.match.params.movieId);
-                                    return <MovieDetail movieId={props.match.params.movieId}/>;
-                                }
-                        }
-                    />
-                    <Route exact path="/profile" component={Profile}/>
-                </Switch>
-            </section>
-        </Fragment>
+            <Alert />
+            <Routes>
+                <Route path="/" element={<Home />}/>
+                <Route path="home" element={<Home />}/>
+                <Route path="register" element={<Register />}/>
+                <Route path="login" element={<Login />}/>
+                <Route path="profile/:id" element={<OtherProfile />}/>
+                <Route path="profile" element={<Profile/>}/>
+                <Route exact={true} path="/details/:movieId"
+                       render={(props)=> {
+                           return <MovieDetail movieId={props.match.params.movieId}/>;
+                            }
+                       }
+                />
+            </Routes>
+{/*>>>>>>> auth*/}
       </Router>
       </Provider>
   );

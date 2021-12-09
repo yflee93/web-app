@@ -2,7 +2,7 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteCollection} from "../../../actions/collection";
 
-const MovieListItem = ({movie, screen}) => {
+const MovieListItem = ({movie, screen, owns}) => {
     const {
         id,
         title,
@@ -10,12 +10,15 @@ const MovieListItem = ({movie, screen}) => {
         overview,
         poster_path
     } = movie;
+    const {profiles} = useSelector(state => state.profile);
 
     const dispatch = useDispatch();
 
     const deleteCollectionClickHandler = () => {
-        deleteCollection(dispatch, id, screen);
+        deleteCollection(dispatch, id, screen, profiles.user._id);
     }
+
+    const {user} = useSelector(state => state.auth);
 
     return (
         <li className="list-group-item">
@@ -27,8 +30,12 @@ const MovieListItem = ({movie, screen}) => {
                              className="img-fluid movie-poster"/>
                     </div>
                     <div className="col-8">
-                        <i className="fas fa-times text-white-50 fa-pull-right"
-                           onClick={deleteCollectionClickHandler} />
+                        {
+                            (owns || (user && user.type === 'admin')) && (
+                                <i className="fas fa-times text-white-50 fa-pull-right"
+                                   onClick={deleteCollectionClickHandler} />
+                            )
+                        }
                         <div className="card-body">
                             <h5 className="card-title">{title}
                             </h5>

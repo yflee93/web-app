@@ -14,7 +14,6 @@ export const fetchCollections = async (dispatch, favorite, bookmark, recommend) 
         let recommends = [];
         for (let mid of favorite) {
             let URL = `${MOVIE_API}/${mid.toString()}?api_key=${API_KEY}`;
-            console.log(URL);
             const res = await axios.get(URL, {transformRequest: (data, headers) => {
                     delete headers.common['x-auth-token'];
                     return data;
@@ -36,7 +35,6 @@ export const fetchCollections = async (dispatch, favorite, bookmark, recommend) 
 
         for (let mid of bookmark) {
             let URL = `${MOVIE_API}/${mid.toString()}?api_key=${API_KEY}`;
-            console.log(URL);
             const res = await axios.get(URL, {transformRequest: (data, headers) => {
                     delete headers.common['x-auth-token'];
                     return data;
@@ -58,7 +56,6 @@ export const fetchCollections = async (dispatch, favorite, bookmark, recommend) 
 
         for (let mid of recommend) {
             let URL = `${MOVIE_API}/${mid.toString()}?api_key=${API_KEY}`;
-            console.log(URL);
             const res = await axios.get(URL, {transformRequest: (data, headers) => {
                     delete headers.common['x-auth-token'];
                     return data;
@@ -90,9 +87,10 @@ export const fetchCollections = async (dispatch, favorite, bookmark, recommend) 
     }
 };
 
-export const deleteCollection = async (dispatch, id, screen) => {
+export const deleteCollection = async (dispatch, id, screen, author_id) => {
     try {
-        const res = await axios.delete(`${URI}/${id}/${screen}`);
+        const res = await axios.delete(`${URI}/${id}/${screen}/${author_id}`);
+
         dispatch({
             type: EDIT_PROFILE,
             payload: res.data
