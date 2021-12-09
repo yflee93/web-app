@@ -6,14 +6,12 @@ import {fetchCollections} from "../../actions/collection";
 import {useDispatch, useSelector} from "react-redux";
 import {Navigate, useParams} from 'react-router';
 import {getProfileById} from "../../actions/profile";
-import {useNavigate} from "react-router-dom";
 
 const OtherProfile = () => {
     const [showWhichScreen, setShowWhichScreen] = useState('favorite');
     const toggleScreen = (screenName) => {
         setShowWhichScreen(screenName);
     }
-    const navigate = useNavigate();
     const {profiles} = useSelector(state => state.profile);
     const {user} = useSelector(state => state.auth);
     const dispatch = useDispatch();
@@ -35,12 +33,12 @@ const OtherProfile = () => {
     return (
         <div className="container">
         <div className="row mt-4">
-            <div className="col-4">
+            <div className="col-3">
                 <BasicInformation owns={false}/>
                 {profiles && <CollectionStats toggle={toggleScreen} screen={showWhichScreen} owns={false}/>}
 
             </div>
-            <div className="col-8 mt-n2">
+            <div className="col-9 mt-n2">
                 {profiles && <MoviesInfo screen={showWhichScreen} owns={false}/>}
 
             </div>

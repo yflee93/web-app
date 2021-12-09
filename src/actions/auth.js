@@ -6,12 +6,10 @@ import {
     AUTH_ERROR,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    LOGOUT,
-    CLEAR_PROFILE
+    LOGOUT
 } from "./constant";
 import {setAlert} from "./alert";
 import setAuthToken from "../utils/setAuthToken";
-import {getCurrentProfile} from "./profile";
 
 const AUTH_URI = 'http://localhost:4000/api/auth';
 const USER_URI = 'http://localhost:4000/api/users';

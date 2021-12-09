@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Navbar from "./components/layout/Navbar";
-import Home from "./components/layout/Home";
+import Home from "./components/home/Home";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Alert from './components/layout/Alert';

@@ -33,6 +33,16 @@ body {
     color: #fff;
 }
 
+.wd-no-wrap {
+    white-space: nowrap;
+}
+
+.wd-avatar-rounded-corner {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
 
 /*profile*/
 .follower-avatar-logo-size {
