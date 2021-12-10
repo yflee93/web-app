@@ -4,7 +4,7 @@ import {
     GET_OTHER_PROFILE,
     PROFILE_ERROR,
     EDIT_PROFILE,
-    GET_PROFILES,
+    GET_PROFILES, CLEAR_PROFILE,
 } from "./constant";
 
 const URI = 'http://localhost:4000/api/profile';
@@ -77,5 +77,11 @@ export const getProfiles = async (dispatch) => {
             payload: { msg: err.response.statusText, status: err.response.status }
         })
     }
+}
+
+export const clearProfile = dispatch => {
+        dispatch({
+            type: CLEAR_PROFILE,
+        })
 }
 

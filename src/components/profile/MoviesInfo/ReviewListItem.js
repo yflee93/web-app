@@ -17,12 +17,18 @@ const ReviewListItem = ({review, owns}) => {
                     <div className="col-4">
                         <img src={review.poster}
                              alt="movie_poster"
-                             className="img-fluid movie-poster"/>
+                             className="img-fluid"/>
                     </div>
                     <div className="col-8">
                         {
-                            (owns || (user && user.type === 'admin')) && (
-                                <i className="fas fa-times text-white-50 fa-pull-right"
+                            owns  && (
+                                <i className="fas fa-2x fa-times text-white-50 fa-pull-right"
+                                   onClick={deleteReviewClickHandler} />
+                            )
+                        }
+                        {
+                            (!owns && (user && user.type === 'admin')) && (
+                                <i className="fas fa-2x fa-user-shield text-danger float-end"
                                    onClick={deleteReviewClickHandler} />
                             )
                         }

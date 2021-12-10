@@ -1,6 +1,7 @@
 import React from 'react';
 import PopularMovies from "./PopularMovies";
 import ReviewersList from "./ReviewersList";
+import CommunityList from "./CommunityList";
 
 
 const Home = () => {
@@ -12,6 +13,7 @@ const Home = () => {
                 </div>
                 <div className="col-3">
                     <ReviewersList />
+                    <CommunityList/>
                 </div>
             </div>
         </div>

@@ -27,12 +27,18 @@ const MovieListItem = ({movie, screen, owns}) => {
                     <div className="col-4">
                         <img src={poster_path}
                              alt="movie_poster"
-                             className="img-fluid movie-poster"/>
+                             className="img-thumbnail"/>
                     </div>
                     <div className="col-8">
                         {
-                            (owns || (user && user.type === 'admin')) && (
-                                <i className="fas fa-times text-white-50 fa-pull-right"
+                            owns && (
+                                <i className="fas fa-2x fa-times text-white-50 fa-pull-right"
+                                   onClick={deleteCollectionClickHandler} />
+                            )
+                        }
+                        {
+                            (!owns && (user && user.type === 'admin')) && (
+                                <i className="fas fa-2x fa-user-shield text-danger float-end"
                                    onClick={deleteCollectionClickHandler} />
                             )
                         }
@@ -41,8 +47,8 @@ const MovieListItem = ({movie, screen, owns}) => {
                             </h5>
                             <p className="card-text text-white-50">{release_date}</p>
                             <p className="card-text movie-list-description">
-                                {overview.length > 200 ? overview.substring(0, 200) : overview}
-                                {overview.length > 200 ? "..." : ""}
+                                {overview.length > 300 ? overview.substring(0, 300) : overview}
+                                {overview.length > 300 ? "..." : ""}
                             </p>
                         </div>
                     </div>

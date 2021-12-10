@@ -8,7 +8,7 @@ import {Navigate, useParams} from 'react-router';
 import {getProfileById} from "../../actions/profile";
 
 const OtherProfile = () => {
-    const [showWhichScreen, setShowWhichScreen] = useState('favorite');
+    const [showWhichScreen, setShowWhichScreen] = useState('recommend');
     const toggleScreen = (screenName) => {
         setShowWhichScreen(screenName);
     }

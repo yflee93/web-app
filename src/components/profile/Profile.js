@@ -5,6 +5,8 @@ import MoviesInfo from "./MoviesInfo";
 import {fetchCollections} from "../../actions/collection";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentProfile} from "../../actions/profile";
+import ReviewersList from "../home/ReviewersList";
+import CommunityList from "../home/CommunityList";
 
 const Profile = () => {
     const [showWhichScreen, setShowWhichScreen] = useState('favorite');
@@ -27,15 +29,19 @@ const Profile = () => {
     return (
             <div className="container">
                 <div className="row mt-4">
-                    <div className="col-3">
+                    <div className="col-5 col-md-5 col-lg-3">
                         <BasicInformation owns={true}/>
                         {isAuthenticated
                         && profiles &&
                         <CollectionStats toggle={toggleScreen} screen={showWhichScreen} owns={true}/>}
                     </div>
-                    <div className="col-9 mt-n2">
+                    <div className="col-7 col-md-7 col-lg-6 col-xl-6 mt-n2">
                         {isAuthenticated && profiles
                         && <MoviesInfo screen={showWhichScreen} owns={true}/>}
+                    </div>
+                    <div className="d-none d-sm-none d-md-none d-lg-block col-lg-3 col-xl-3">
+                        <ReviewersList />
+                        <CommunityList/>
                     </div>
                 </div>
             </div>

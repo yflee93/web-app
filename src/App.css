@@ -43,6 +43,14 @@ body {
     width: 50px;
 }
 
+.wd-font-size-8 {
+    font-size: 8px;
+}
+
+.wd-no-background {
+    background-color: #060606;
+}
+
 
 /*profile*/
 .follower-avatar-logo-size {
@@ -71,6 +79,7 @@ body {
 }
 
 /*movie list*/
+
 .movie-list-bookmark {
     position: absolute;
     left: 0;
@@ -91,10 +100,10 @@ body {
     transition: transform 0.2s;
 }
 
-.movie-list-item-container:hover {
-    cursor: pointer;
-    transform: scale(1.1);
-}
+/*.movie-list-item-container:hover {*/
+/*    cursor: pointer;*/
+/*    transform: scale(1.1);*/
+/*}*/
 
 /*follow list*/
 .follow-list-button:focus {
