@@ -1,33 +1,91 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import "./itemPage.css";
-import exampleMovieDetail from "./exampleMovieDetail.json";
 import ReactStars from "react-rating-stars-component";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentProfile} from "../../actions/profile";
+import {fetchReview, postReview} from "../../actions/review";
+import {fetchArticle, postArticle} from "../../actions/article";
 import {deleteCollection, addCollection} from "../../actions/collection";
-
-// import {Link} from "react-router-dom";
+import {fetchMovieDetail} from "../../actions/movieDetail";
+import ReviewList from "./ReviewList";
+import ArticleList from "./ArticleList";
 
 const IMAGE_BASE_PATH_POSTER = 'https://image.tmdb.org/t/p/w300';
 const IMAGE_BASE_PATH_ACTOR = 'https://image.tmdb.org/t/p/w300';
 const IMAGE_BASE_PATH_BACKDROP = 'https://image.tmdb.org/t/p/original';
 
-const ratingChanged = (newRating) => {
-    console.log(newRating);
-};
-
-const MovieDetailItem = ({movieDetail = {exampleMovieDetail}}) => {
-    const {profiles} = useSelector(state => state.profile);
+const MovieDetailItem = ({movieId}) => {
     const dispatch = useDispatch();
+    let [userReview, setUserReview] = useState('');
+    let [userRating, setUserRating] = useState(0);
+    let [userReviewTitle, setUserReviewTitle] = useState('');
+    let [userArticle, setUserArticle] = useState('');
+    let [userArticleTitle, setUserArticleTitle] = useState('');
+    const ratingChanged = (newRating) => {
+        setUserRating(newRating);
+    };
+    const {profiles} = useSelector(state => state.profile);
+    const {user} = useSelector(state => state.auth);
+    const reviews = useSelector(state => state.review);
+    const articles = useSelector(state => state.article);
+    const movieDetail = useSelector((state) => state.moviedetail);
+
     useEffect( ()=>{
+        fetchMovieDetail(dispatch, movieId);
         getCurrentProfile(dispatch);
-    }, [dispatch]);
+        fetchReview(dispatch, movieId);
+        fetchArticle(dispatch, movieId);
+    }, [dispatch, movieId]);
+
+    const submitReviewClickHandler = () => {
+        // console.log("userReview");
+        // console.log(userReview);
+        // console.log("userRating");
+        // console.log(userRating);
+        // console.log("movieId");
+        // console.log(movieId);
+        // console.log("review Title");
+        // console.log(userReviewTitle);
+        // console.log("poster");
+        // console.log(`${IMAGE_BASE_PATH_POSTER}${movieDetail.poster_path}`);
+        let reviewInfo = {
+            content: userReview,
+            rating: userRating,
+            poster: `${IMAGE_BASE_PATH_POSTER}${movieDetail.poster_path}`,
+            title: userReviewTitle,
+            movieName: movieDetail.original_title,
+            movieRating: movieDetail.vote_average
+        }
+        postReview(dispatch, movieId, reviewInfo);
+        window.location.reload();
+    };
+
+    const submitArticleClickHandler = () => {
+        // console.log("userReview");
+        // console.log(userReview);
+        // console.log("userRating");
+        // console.log(userRating);
+        // console.log("movieId");
+        // console.log(movieId);
+        // console.log("review Title");
+        // console.log(userReviewTitle);
+        // console.log("poster");
+        // console.log(`${IMAGE_BASE_PATH_POSTER}${movieDetail.poster_path}`);
+        let articleInfo = {
+            content: userArticle,
+            poster: `${IMAGE_BASE_PATH_POSTER}${movieDetail.poster_path}`,
+            title: userArticleTitle,
+            movieName: movieDetail.original_title,
+            movieRating: movieDetail.vote_average
+        }
+        postArticle(dispatch, movieId, articleInfo);
+        window.location.reload();
+    };
+
     if (movieDetail && profiles){
-        // console.log("profiles");
-        // console.log(profiles);
-        const isFavorite = (profiles.movieCollections.favorites.findIndex((id) => id == movieDetail.id) !== -1);
-        const isBookmark = (profiles.movieCollections.bookmarks.findIndex((id) => id == movieDetail.id) !== -1);
-        const isRecommend = (profiles.movieCollections.recommends.findIndex((id) => id == movieDetail.id) !== -1);
+        const isFavorite = (profiles.movieCollections.favorites.findIndex((id) => id === movieDetail.id) !== -1);
+        const isBookmark = (profiles.movieCollections.bookmarks.findIndex((id) => id === movieDetail.id) !== -1);
+        const isRecommend = (profiles.movieCollections.recommends.findIndex((id) => id === movieDetail.id) !== -1);
         const updateCollectionClickHandler = (collection, isEnabled) => {
             if (isEnabled) {
                 deleteCollection(dispatch, movieDetail.id, collection, profiles.user._id);
@@ -174,8 +232,8 @@ const MovieDetailItem = ({movieDetail = {exampleMovieDetail}}) => {
                             </div>
                             <div className="col-12 pt-2 pb-2">
                                 <div className="row subtitlediv">
-                                    After being left at home by himself for the holidays, 10-year-old Max Mercer must work
-                                    to defend his home from a married couple who tries to steal back a valuable heirloom.
+                                    {/*{reviews.length > 0 ? reviews[0].content : ""}*/}
+                                    <ReviewList reviews={reviews}/>
                                 </div>
                             </div>
                         </div>
@@ -186,8 +244,7 @@ const MovieDetailItem = ({movieDetail = {exampleMovieDetail}}) => {
                             </div>
                             <div className="col-12 pt-2 pb-2">
                                 <div className="row subtitlediv">
-                                    After being left at home by himself for the holidays, 10-year-old Max Mercer must work
-                                    to defend his home from a married couple who tries to steal back a valuable heirloom.
+                                    <ArticleList articles={articles}/>
                                 </div>
                             </div>
                         </div>
@@ -273,11 +330,20 @@ const MovieDetailItem = ({movieDetail = {exampleMovieDetail}}) => {
                             activeColor="#ffd700"
                         />
                         <div className="row">
-                            <textarea placeholder="Wirte your review here!" className="mt-3 mb-3"
-                                                       spellCheck="false" style={{"width": "100%"}}>
-                            </textarea>
+                             <input placeholder="Title" className="mt-3 mb-3 form-control"
+                                    aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                                       value={userReviewTitle}
+                                       onChange={(event) =>
+                                           setUserReviewTitle(event.target.value)}
+                                       spellCheck="false" style={{"width": "50%", "font-size": "small"}}/>
+                            <textarea placeholder="Wirte your review here!" className="mt-0 mb-0 form-control"
+                                      value={userReview}
+                                      aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                                      onChange={(event) =>
+                                                setUserReview(event.target.value)}
+                                      spellCheck="false" style={{"width": "70%"}}/>
                         </div>
-                        <div className="row">
+                        <div className="row mt-2 mb-3">
                             <div className="col-11">
                                 <i className="fas fa-images pe-3" style={{"color": "rgb(29,161,242)"}}></i>
                                 <i className="fas fa-chart-line pe-3" style={{"color": "rgb(29,161,242)"}}></i>
@@ -287,11 +353,49 @@ const MovieDetailItem = ({movieDetail = {exampleMovieDetail}}) => {
                             <div className="col-1">
                                 <button type="button"
                                         className="btn btn-primary blue-button ps-1"
-                                        style={{"width": "100%"}}>Submit
+                                        style={{"width": "100%"}}
+                                        onClick={submitReviewClickHandler}
+                                >Submit
                                 </button>
                             </div>
                         </div>
                     </div>
+                    {   user && (user.type === "reviewer" || user.type === "admin") &&
+                        <div className="row mt-4">
+                        <div className="introtitledivnobanner ps-2">
+                            WRITE ARTICLE
+                        </div>
+                        <div className="row">
+                            <input placeholder="Title" className="mt-3 mb-3 form-control"
+                                   aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                                   value={userArticleTitle}
+                                   onChange={(event) =>
+                                       setUserArticleTitle(event.target.value)}
+                                   spellCheck="false" style={{"width": "50%", "font-size": "small"}}/>
+                            <textarea placeholder="Wirte your review here!" className="mt-0 mb-0 form-control"
+                                      value={userArticle}
+                                      aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                                      onChange={(event) =>
+                                          setUserArticle(event.target.value)}
+                                      spellCheck="false" style={{"width": "70%"}}/>
+                        </div>
+                        <div className="row mt-2 mb-3">
+                            <div className="col-11">
+                                {/*<i className="fas fa-images pe-3" style={{"color": "rgb(29,161,242)"}}></i>*/}
+                                {/*<i className="fas fa-chart-line pe-3" style={{"color": "rgb(29,161,242)"}}></i>*/}
+                                {/*<i className="far fa-smile-wink pe-3" style={{"color": "rgb(29,161,242)"}}></i>*/}
+                                {/*<i className="fas fa-calendar-week pe-3" style={{"color": "rgb(29,161,242)"}}></i>*/}
+                            </div>
+                            <div className="col-1">
+                                <button type="button"
+                                        className="btn btn-primary blue-button ps-1"
+                                        style={{"width": "100%"}}
+                                        onClick={submitArticleClickHandler}
+                                >Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>}
                 </div>
             </>
         );

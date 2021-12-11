@@ -44,6 +44,10 @@
     height: 20px;
 }
 
+.introtitledivnobanner {
+    font-weight: 800;
+}
+
 .seconddiv {
     border-top-color: white;
     border-top-style: solid;

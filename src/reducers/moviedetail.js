@@ -1,9 +1,14 @@
 import initialState from '../components/movieDetail/exampleMovieDetail.json'
+import {FETCH_MOVIE_DETAIL} from "../actions/constant";
 
 const moviedetail = (state = initialState, action) => {
-    switch (action.type) {
-        case 'fetch-movie-detail':
-            return action.movieDetail;
+    const {type, payload} = action;
+    switch (type) {
+        case FETCH_MOVIE_DETAIL:
+            return {
+                ...state,
+                ...payload
+            };
         default:
             return(state);
     }

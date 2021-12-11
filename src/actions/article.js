@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {DELETE_ARTICLE, PROFILE_ERROR} from "./constant";
+import {FETCH_ARTICLE, DELETE_ARTICLE, CREATE_ARTICLE, PROFILE_ERROR} from "./constant";
 
 const URI = 'http://localhost:4000/api/article';
 
@@ -18,3 +18,46 @@ export const deleteArticle = async (dispatch, article_id, movie_id, author_id) =
         })
     }
 };
+
+export const fetchArticle = async (dispatch, movie_id) => {
+    try {
+        const res = await axios.get(`${URI}/${movie_id}`);
+        dispatch({
+            type: FETCH_ARTICLE,
+            payload: res.data
+        });
+    }
+    catch(err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+};
+
+export const postArticle = async (dispatch, movieId, articleInfo) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    const body = JSON.stringify(articleInfo);
+    // console.log("body");
+    // console.log(body);
+    try {
+        const res = await axios.post(`${URI}/${movieId}`, body, config);
+        console.log("res.data");
+        console.log(res.data);
+        dispatch({
+            type: CREATE_ARTICLE,
+            payload: res.data
+        })
+    }
+
+    catch(err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+}

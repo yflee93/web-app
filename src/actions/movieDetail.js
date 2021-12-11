@@ -1,3 +1,5 @@
+import {FETCH_MOVIE_DETAIL} from "./constant";
+
 const MOVIE_API = 'https://api.themoviedb.org/3/movie';
 const API_KEY = '6ecbcc32f1691bbd0ef5826095745798';
 
@@ -7,10 +9,10 @@ export const fetchMovieDetail = (dispatch, movieId) => {
             response = response.json();
             return response;
         })
-        .then(movieDetail => {
+        .then(payload => {
             return dispatch({
-                type: 'fetch-movie-detail',
-                movieDetail
+                type: FETCH_MOVIE_DETAIL,
+                payload
             });
         }
     );

@@ -13,8 +13,6 @@ import setAuthToken from './utils/setAuthToken';
 import {loadUser} from "./actions/auth";
 
 import MovieDetail from "./components/movieDetail";
-import {getCurrentProfile} from "./actions/profile";
-
 
 //Styles
 import './vendors/bootstrap/css/bootstrap.min.css'
