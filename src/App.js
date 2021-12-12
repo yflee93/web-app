@@ -6,6 +6,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Alert from './components/layout/Alert';
 import Profile from "./components/profile/Profile";
+import SearchPage from './SearchPage';
 
 //Authentication
 import setAuthToken from './utils/setAuthToken';
@@ -46,6 +47,7 @@ const App = () => {
                     <Route exact path="/register" component={Register}/>
                     <Route exact path="/login" component={Login}/>
                     <Route exact path="/profile" component={Profile}/>
+                    <Route path="/search/:keyword?" component={SearchPage}/>
                 </Switch>
             </section>
         </Fragment>
