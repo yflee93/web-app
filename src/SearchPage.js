@@ -15,12 +15,18 @@ function DropDown({ label, options, selectedValue, onValueChange }) {
 const SearchPage = () => {
   let { keyword } = useParams();
   const [movieList, setMovieList] = useState([]);
+  const [showStatus, setShowStatus] = useState('');
 
   const movieName = useRef(keyword || '');
   const ratingFilter = useRef('NA');
   const languageFilter = useRef('NA');
 
-  useEffect(search, [])
+  useEffect(() => {
+    setShowStatus('Upcomming movies')
+    fetch(`http://localhost:4000/search/NA/NA/NA`)
+    .then(response => response.json())
+    .then(list => setMovieList(list))
+  }, [])
 
   function search() {
     if (movieName.current === '') {
@@ -28,6 +34,7 @@ const SearchPage = () => {
       setMovieList([])
     } else {
       window.history.replaceState(null, '', `/search/${movieName.current}`);
+      setShowStatus('Search Result')
       fetch(`http://localhost:4000/search/${movieName.current}/${languageFilter.current}/${ratingFilter.current}`)
         .then(response => response.json())
         .then(list => setMovieList(list))
@@ -54,7 +61,7 @@ const SearchPage = () => {
       {movieList && movieList.length > 0 ?
         <div>
           <ul>
-            <h3 style={{ paddingBottom: 25 }}>Search Result</h3>
+            <h3 style={{ paddingBottom: 25 }}>{showStatus}</h3>
             {movieList.map(m => <MovieIntro movie={m} language={languageFilter.current} rating={ratingFilter.current} />)}
           </ul>
         </div>
