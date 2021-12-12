@@ -1,6 +1,7 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteCollection} from "../../../actions/collection";
+import {useNavigate} from "react-router";
 
 const MovieListItem = ({movie, screen, owns}) => {
     const {
@@ -10,6 +11,7 @@ const MovieListItem = ({movie, screen, owns}) => {
         overview,
         poster_path
     } = movie;
+    const navigate = useNavigate();
     const {profiles} = useSelector(state => state.profile);
 
     const dispatch = useDispatch();
@@ -21,7 +23,9 @@ const MovieListItem = ({movie, screen, owns}) => {
     const {user} = useSelector(state => state.auth);
 
     return (
-        <li className="list-group-item">
+        <li className="list-group-item" onClick={()=>{
+            navigate(`/details/${id}`);
+        }}>
             <div className="card mb-3 movie-list-item-container">
                 <div className="row g-0">
                     <div className="col-4">

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {DELETE_REVIEW, PROFILE_ERROR} from "./constant";
+import {DELETE_REVIEW, PROFILE_ERROR, FETCH_REVIEW, CREATE_REVIEW} from "./constant";
 
 const URI = 'http://localhost:4000/api/review';
 
@@ -18,3 +18,46 @@ export const deleteReview = async (dispatch, review_id, movie_id, author_id) => 
         })
     }
 };
+
+export const fetchReview = async (dispatch, movie_id) => {
+    try {
+        const res = await axios.get(`${URI}/${movie_id}`);
+        dispatch({
+            type: FETCH_REVIEW,
+            payload: res.data
+        });
+    }
+    catch(err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+};
+
+export const postReview = async (dispatch, movieId, reviewInfo) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    const body = JSON.stringify(reviewInfo);
+    console.log("body");
+    console.log(body);
+    try {
+        const res = await axios.post(`${URI}/${movieId}`, body, config);
+        console.log("res.data");
+        console.log(res.data);
+        dispatch({
+            type: CREATE_REVIEW,
+            payload: res.data
+        })
+    }
+
+    catch(err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+}

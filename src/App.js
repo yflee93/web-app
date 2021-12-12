@@ -7,6 +7,8 @@ import Login from "./components/auth/Login";
 import Alert from './components/layout/Alert';
 import Profile from "./components/profile/Profile";
 import OtherProfile from './components/profile/OtherProfile';
+import SearchPage from "./components/search/SearchPage";
+import MovieDetail from "./components/movieDetail";
 
 //Authentication
 import setAuthToken from './utils/setAuthToken';
@@ -42,6 +44,8 @@ const App = () => {
                 <Route path="login" element={<Login />}/>
                 <Route path="profile/:id" element={<OtherProfile />}/>
                 <Route path="profile" element={<Profile/>}/>
+                <Route path="/search" element={<SearchPage/>}/>
+                <Route path="/details/:movieId" element={<MovieDetail />}/>
             </Routes>
       </Router>
       </Provider>
