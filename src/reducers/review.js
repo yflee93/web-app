@@ -12,12 +12,12 @@ const review = (state= initialState, action) => {
 
     switch (type) {
         case FETCH_REVIEW:
-            console.log("payload in reducer fetch");
-            console.log(payload);
+            // console.log("payload in reducer fetch");
+            // console.log(payload);
             return payload;
         case CREATE_REVIEW:
-            console.log("payload in reducer create");
-            console.log(payload);
+            // console.log("payload in reducer create");
+            // console.log(payload);
             state.push(payload);
             return state;
         // return payload;

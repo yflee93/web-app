@@ -10,12 +10,12 @@ const article = (state= initialState, action) => {
 
     switch (type) {
         case FETCH_ARTICLE:
-            console.log("payload in reducer fetch");
-            console.log(payload);
+            // console.log("payload in reducer fetch");
+            // console.log(payload);
             return payload;
         case CREATE_ARTICLE:
-            console.log("payload in reducer create");
-            console.log(payload);
+            // console.log("payload in reducer create");
+            // console.log(payload);
             state.push(payload);
             return state;
         // return payload;

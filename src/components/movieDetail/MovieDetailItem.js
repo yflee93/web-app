@@ -36,7 +36,7 @@ const MovieDetailItem = ({movieId}) => {
         fetchArticle(dispatch, movieId);
     }, [dispatch, movieId]);
 
-    console.log(movieDetail);
+    // console.log(movieDetail);
 
     const submitReviewClickHandler = () => {
         let reviewInfo = {
@@ -63,18 +63,19 @@ const MovieDetailItem = ({movieId}) => {
         window.location.reload();
     };
 
-    if (movieDetail && profiles){
-        const isFavorite = (profiles.movieCollections.favorites.findIndex((id) => id === movieDetail.id) !== -1);
-        const isBookmark = (profiles.movieCollections.bookmarks.findIndex((id) => id === movieDetail.id) !== -1);
-        const isRecommend = (profiles.movieCollections.recommends.findIndex((id) => id === movieDetail.id) !== -1);
+    if (movieDetail){
+        const isFavorite = profiles ? (profiles.movieCollections.favorites.findIndex((id) => id === movieDetail.id) !== -1) : false;
+        const isBookmark = profiles ? (profiles.movieCollections.bookmarks.findIndex((id) => id === movieDetail.id) !== -1) : false;
+        const isRecommend = profiles ? (profiles.movieCollections.recommends.findIndex((id) => id === movieDetail.id) !== -1) : false;
         const updateCollectionClickHandler = (collection, isEnabled) => {
-            if (isEnabled) {
-                deleteCollection(dispatch, movieDetail.id, collection, profiles.user._id);
+            if (profiles) {
+                if (isEnabled) {
+                    deleteCollection(dispatch, movieDetail.id, collection, profiles.user._id);
+                }
+                else {
+                    addCollection(dispatch, movieDetail.id, collection, profiles.user._id);
+                }
             }
-            else {
-                addCollection(dispatch, movieDetail.id, collection, profiles.user._id);
-            }
-
         }
         return (
             <>
@@ -93,18 +94,19 @@ const MovieDetailItem = ({movieId}) => {
                             </div>
                             <div className="row pt-4 pb-2">
                                 <div className="col-4 ps-0 pe-0 subtitlediv">
-                                    <p className="mb-0" style={{"font-weight": "bold"}}>Status</p>
+                                    <p className="mb-0" style={{"fontWeight": "bold"}}>Status</p>
                                     <p className="mt-0">{movieDetail.status}</p>
                                 </div>
                                 <div className="col-4 ps-0 pe-0 subtitlediv">
-                                    <p className="mb-0" style={{"font-weight": "bold"}}>Average Score</p>
+                                    <p className="mb-0" style={{"fontWeight": "bold"}}>Average Score</p>
                                     <p className="mt-0">{movieDetail.vote_average}</p>
                                 </div>
                                 <div className="col-4 ps-0 pe-0 subtitlediv">
-                                    <p className="mb-0" style={{"font-weight": "bold"}}>Popularity</p>
+                                    <p className="mb-0" style={{"fontWeight": "bold"}}>Popularity</p>
                                     <p className="mt-0">{movieDetail.popularity}</p>
                                 </div>
                             </div>
+                            { profiles &&
                             <div className="row pt-4" onClick={() => updateCollectionClickHandler("favorite", isFavorite)}>
                                 {/*<div className="row pt-4">*/}
                                 {
@@ -115,7 +117,8 @@ const MovieDetailItem = ({movieId}) => {
                                     !isFavorite &&
                                     <i className="far fa-heart ps-0"> Like </i>
                                 }
-                            </div>
+                            </div>}
+                            { profiles &&
                             <div className="row" onClick={() => updateCollectionClickHandler("bookmark", isBookmark)}>
                                 {/*<div className="row">*/}
                                 {
@@ -126,7 +129,8 @@ const MovieDetailItem = ({movieId}) => {
                                     !isBookmark &&
                                     <i className="far fa-bookmark mt-3 ps-0"> WatchList </i>
                                 }
-                            </div>
+                            </div>}
+                            {profiles &&
                             <div className="row" onClick={() => updateCollectionClickHandler("recommend", isRecommend)}>
                                 {/*<div className="row">*/}
                                 {
@@ -137,7 +141,7 @@ const MovieDetailItem = ({movieId}) => {
                                     !isRecommend &&
                                     <i className="far fa-thumbs-up mt-3 ps-0"> Recommend </i>
                                 }
-                            </div>
+                            </div>}
                         </div>
                     </div>
 
@@ -296,6 +300,7 @@ const MovieDetailItem = ({movieId}) => {
                             </div>
                         </div>
                     </div>
+                    { profiles &&
                     <div className="row mt-4">
                         <div className="introtitlediv ps-4">
                             WRITE REVIEW
@@ -316,7 +321,7 @@ const MovieDetailItem = ({movieId}) => {
                                    value={userReviewTitle}
                                    onChange={(event) =>
                                        setUserReviewTitle(event.target.value)}
-                                   spellCheck="false" style={{"width": "50%", "font-size": "small"}}/>
+                                   spellCheck="false" style={{"width": "50%", "fontSize": "small"}}/>
                             <textarea placeholder="Wirte your review here!" className="mt-0 mb-0 form-control"
                                       value={userReview}
                                       aria-label="Small" aria-describedby="inputGroup-sizing-sm"
@@ -340,8 +345,8 @@ const MovieDetailItem = ({movieId}) => {
                                 </button>
                             </div>
                         </div>
-                    </div>
-                    {   user && (user.type === "reviewer" || user.type === "admin") &&
+                    </div>}
+                    {  user && (user.type === "reviewer" || user.type === "admin") && profiles &&
                     <div className="row mt-4">
                         <div className="introtitledivnobanner ps-2">
                             WRITE ARTICLE
@@ -352,7 +357,7 @@ const MovieDetailItem = ({movieId}) => {
                                    value={userArticleTitle}
                                    onChange={(event) =>
                                        setUserArticleTitle(event.target.value)}
-                                   spellCheck="false" style={{"width": "50%", "font-size": "small"}}/>
+                                   spellCheck="false" style={{"width": "50%", "fontSize": "small"}}/>
                             <textarea placeholder="Wirte your review here!" className="mt-0 mb-0 form-control"
                                       value={userArticle}
                                       aria-label="Small" aria-describedby="inputGroup-sizing-sm"

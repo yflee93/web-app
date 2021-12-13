@@ -6,7 +6,7 @@ const ReviewList = ({reviews}) => {
         <>
             <div className="list-group pe-0">
                 {
-                    reviews.map(review => {
+                    reviews.map((review) => {
                         if (review){
                             return(
                                 <>
