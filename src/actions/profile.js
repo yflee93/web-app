@@ -1,11 +1,14 @@
 import axios from 'axios';
 import {
     GET_CURRENT_PROFILE,
+    GET_OTHER_PROFILE,
     PROFILE_ERROR,
     EDIT_PROFILE,
+    GET_PROFILES, CLEAR_PROFILE,
 } from "./constant";
 
-const URI = 'http://localhost:4000/api/profile'
+const URI = 'http://localhost:4000/api/profile';
+const PROFILES_URI = 'http://localhost:4000/api/profiles';
 
 export const getCurrentProfile = async (dispatch) => {
     try {
@@ -44,3 +47,41 @@ export const updateCurrentProfile = async (dispatch, {bio, name, location}) => {
         })
     }
 };
+
+
+export const getProfileById = async (dispatch, id) => {
+    try {
+        const res = await axios.get(`${URI}/${id}`);
+        dispatch({
+            type: GET_OTHER_PROFILE,
+            payload: res.data
+        })
+    } catch(err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+}
+
+export const getProfiles = async (dispatch) => {
+    try {
+        const res = await axios.get(PROFILES_URI);
+        dispatch({
+            type: GET_PROFILES,
+            payload: res.data
+        })
+    } catch(err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+}
+
+export const clearProfile = dispatch => {
+        dispatch({
+            type: CLEAR_PROFILE,
+        })
+}
+
