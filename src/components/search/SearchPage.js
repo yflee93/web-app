@@ -39,7 +39,7 @@ const SearchPage = () => {
         } else {
             window.history.replaceState(null, '', `/search/${movieName.current}`);
             setShowStatus('Search Result')
-            fetch(`http://localhost:4000/search/${movieName.current}/${languageFilter.current}/${ratingFilter.current}`)
+            fetch(`${URI_PREFIX}/search/${movieName.current}/${languageFilter.current}/${ratingFilter.current}`)
                 .then(response => response.json())
                 .then(list => setMovieList(list))
         }

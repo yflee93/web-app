@@ -45,7 +45,8 @@ const MovieDetailItem = ({movieId}) => {
             poster: `${IMAGE_BASE_PATH_POSTER}${movieDetail.poster_path}`,
             title: userReviewTitle,
             movieName: movieDetail.original_title,
-            movieRating: movieDetail.vote_average
+            movieRating: movieDetail.vote_average,
+
         }
         postReview(dispatch, movieId, reviewInfo);
         window.location.reload();
