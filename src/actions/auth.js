@@ -11,8 +11,13 @@ import {
 import {setAlert} from "./alert";
 import setAuthToken from "../utils/setAuthToken";
 
-const AUTH_URI = 'http://localhost:4000/api/auth';
-const USER_URI = 'http://localhost:4000/api/users';
+const AUTH_URI = process.env.NODE_ENV === 'development' ?
+    'http://localhost:4000/api/auth':
+    'https://web-app-final.herokuapp.com/api/auth'
+
+const USER_URI = process.env.NODE_ENV === 'development' ?
+    'http://localhost:4000/api/users':
+    'https://web-app-final.herokuapp.com/api/users'
 
 //Load User
 export const loadUser = async (dispatch) => {

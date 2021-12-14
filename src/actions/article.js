@@ -1,7 +1,11 @@
 import axios from 'axios';
 import {DELETE_ARTICLE, PROFILE_ERROR, FETCH_ARTICLE, CREATE_ARTICLE} from "./constant";
 
-const URI = 'http://localhost:4000/api/article';
+
+const URI = process.env.NODE_ENV === 'development' ?
+    'http://localhost:4000/api/article':
+    'https://web-app-final.herokuapp.com/api/article'
+
 
 export const deleteArticle = async (dispatch, article_id, movie_id, author_id) => {
     try {

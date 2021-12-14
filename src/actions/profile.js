@@ -7,8 +7,14 @@ import {
     GET_PROFILES, CLEAR_PROFILE,
 } from "./constant";
 
-const URI = 'http://localhost:4000/api/profile';
-const PROFILES_URI = 'http://localhost:4000/api/profiles';
+
+const URI = process.env.NODE_ENV === 'development' ?
+    'http://localhost:4000/api/profile':
+    'https://web-app-final.herokuapp.com/api/profile';
+
+const PROFILES_URI = process.env.NODE_ENV === 'development' ?
+    'http://localhost:4000/api/profiles':
+    'https://web-app-final.herokuapp.com/api/profiles';
 
 export const getCurrentProfile = async (dispatch) => {
     try {
