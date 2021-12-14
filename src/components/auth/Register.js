@@ -41,7 +41,10 @@ const Register = () => {
     return (
         <section className="container">
             <h1 className="wd-large text-primary mt-3">Sign Up</h1>
-            <p className="wd-lead"><i className="fas fa-user"></i> Create Your Account</p>
+            <p className="wd-lead"><i className="fas fa-user"/> Create Your Account</p>
+            <div className="mt-4">
+                * Before registration, please read our privacy content. <Link to="/privacy">Privacy</Link>
+            </div>
             <form className="form" onSubmit={e=>onSubmit(e)}>
                 <div className="form-group">
                     <label htmlFor="name" className="form-label mt-3">Name</label>

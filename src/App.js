@@ -9,6 +9,7 @@ import Profile from "./components/profile/Profile";
 import OtherProfile from './components/profile/OtherProfile';
 import SearchPage from "./components/search/SearchPage";
 import MovieDetail from "./components/movieDetail";
+import Privacy from "./components/privacy/Privacy";
 
 //Authentication
 import setAuthToken from './utils/setAuthToken';
@@ -46,6 +47,7 @@ const App = () => {
                 <Route path="profile" element={<Profile/>}/>
                 <Route path="/search" element={<SearchPage/>}/>
                 <Route path="/details/:movieId" element={<MovieDetail />}/>
+                <Route path="privacy" element={<Privacy />}/>
             </Routes>
       </Router>
       </Provider>

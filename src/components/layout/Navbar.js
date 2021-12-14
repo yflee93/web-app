@@ -32,7 +32,9 @@ const Navbar = () => {
                 </Link>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="#">Privacy Content</a>
+                <Link to="/privacy" className="nav-link">
+                    Privacy Content
+                </Link>
             </li>
         </ul>
     );
@@ -55,7 +57,9 @@ const Navbar = () => {
                 </Link>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="#">Privacy Content</a>
+                <Link to="/privacy" className="nav-link">
+                    Privacy Content
+                </Link>
             </li>
         </ul>
     );
@@ -63,7 +67,7 @@ const Navbar = () => {
         <nav className="navbar navbar-expand navbar-dark wd-dark">
             <div className="container-fluid row">
                 <div className="col-3">
-                    <Link to="/" className="navbar-brand"><i className="fas fa-film"/>&#160;Movie App</Link>
+                    <Link to="/" className="navbar-brand"><i className="fas fa-film"/>&#160;Movie Pal</Link>
                 </div>
 
                 <div className="col-9">

@@ -100,7 +100,7 @@ const MovieDetailItem = ({movieId}) => {
                                     <p className="mt-0">{movieDetail.status}</p>
                                 </div>
                                 <div className="col-4 ps-0 pe-0 subtitlediv">
-                                    <p className="mb-0" style={{"fontWeight": "bold"}}>Average Score</p>
+                                    <p className="mb-0" style={{"fontWeight": "bold"}}>Average Score (from TMDB)</p>
                                     <p className="mt-0">{movieDetail.vote_average}</p>
                                 </div>
                                 <div className="col-4 ps-0 pe-0 subtitlediv">
