@@ -13,4 +13,7 @@ Link to requirements: https://docs.google.com/document/d/1De-UdZ8LpJt6tftlCsYcZz
 
 Link to discussion panels: https://docs.google.com/document/d/1MkRI5LKUvJ7id2OPCHkD9xxl-5ErxA1O_YTaP9aOkNQ/edit
 
+##Design UML
+![UML](https://github.com/yflee93/web-app/blob/main/Design.png?raw=true)
+
 
