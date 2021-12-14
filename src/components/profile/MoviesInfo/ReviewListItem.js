@@ -2,14 +2,16 @@ import React from "react";
 import ReactStars from "react-rating-stars-component";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteReview} from "../../../actions/review";
+import {useNavigate} from "react-router";
 
 const ReviewListItem = ({review, owns}) => {
-    const {_id, author} = review;
+    const {_id, author, originalId} = review;
     const {user} = useSelector(state => state.auth);
     const dispatch = useDispatch();
     const deleteReviewClickHandler = () => {
         deleteReview(dispatch, _id, 1, author);
     }
+    const navigate = useNavigate();
     return (
         <li className="list-group-item">
             <div className="card mb-3">
@@ -17,7 +19,10 @@ const ReviewListItem = ({review, owns}) => {
                     <div className="col-4">
                         <img src={review.poster}
                              alt="movie_poster"
-                             className="img-fluid"/>
+                             className="img-fluid"
+                             onClick={()=>{
+                                 navigate(`/details/${originalId}`);
+                             }}/>
                     </div>
                     <div className="col-8">
                         {

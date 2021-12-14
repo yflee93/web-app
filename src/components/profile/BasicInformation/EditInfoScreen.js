@@ -28,6 +28,7 @@ const EditInfoScreen = ({toggle}) => {
 
     const updateProfileClickHandler = (payload) => {
         updateCurrentProfile(dispatch, payload);
+        window.location.reload();
     }
 
     if (!isAuthenticated) {

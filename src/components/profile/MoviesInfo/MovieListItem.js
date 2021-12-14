@@ -23,15 +23,16 @@ const MovieListItem = ({movie, screen, owns}) => {
     const {user} = useSelector(state => state.auth);
 
     return (
-        <li className="list-group-item" onClick={()=>{
-            navigate(`/details/${id}`);
-        }}>
+        <li className="list-group-item" >
             <div className="card mb-3 movie-list-item-container">
                 <div className="row g-0">
                     <div className="col-4">
                         <img src={poster_path}
                              alt="movie_poster"
-                             className="img-thumbnail"/>
+                             className="img-thumbnail"
+                             onClick={()=>{
+                                 navigate(`/details/${id}`);
+                             }}/>
                     </div>
                     <div className="col-8">
                         {

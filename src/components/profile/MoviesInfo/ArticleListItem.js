@@ -1,14 +1,16 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteArticle} from "../../../actions/article";
+import {useNavigate} from "react-router";
 
 const ArticleListItem = ({article, owns}) => {
-    const {_id, author} = article
+    const {_id, author, originalId} = article
     const dispatch = useDispatch();
     const {user} = useSelector(state => state.auth);
     const deleteArticleClickHandler = () => {
         deleteArticle(dispatch, _id, 1, author);
     }
+    const navigate = useNavigate();
     return (
         <li className="list-group-item">
             <div className="card mb-3">
@@ -16,7 +18,10 @@ const ArticleListItem = ({article, owns}) => {
                     <div className="col-4">
                         <img src={article.poster}
                              alt="movie_poster"
-                             className="img-fluid"/>
+                             className="img-fluid"
+                             onClick={()=>{
+                                 navigate(`/details/${originalId}`);
+                             }}/>
                     </div>
                     <div className="col-8">
                         {

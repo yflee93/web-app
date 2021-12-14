@@ -13,6 +13,7 @@ const Navbar = () => {
             <li className="nav-item">
                 <a onClick={() => {
                     logout(dispatch);
+                    window.location.reload();
                 }} className="nav-link">
                     <i className="fas fa-sign-out-alt"/> {' '}
                     Logout
