@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import MovieIntro from './components/layout/MovieIntro'
 
 function DropDown({ label, options, selectedValue, onValueChange }) {
-  return <select defaultValue={selectedValue} style={{ width: 120, fontSize : 20 }} onChange={(event) => {
+  return <select defaultValue={selectedValue} style={{ width: 120, fontSize: 20 }} onChange={(event) => {
     onValueChange(event.target.value, label);
   }}>
     {
@@ -13,27 +13,41 @@ function DropDown({ label, options, selectedValue, onValueChange }) {
 }
 
 const SearchPage = () => {
-  let { keyword } = useParams();
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
   const [movieList, setMovieList] = useState([]);
   const [showStatus, setShowStatus] = useState('');
 
-  const movieName = useRef(keyword || '');
-  const ratingFilter = useRef('NA');
-  const languageFilter = useRef('NA');
+  const movieName = useRef(query.get('keyword') || '');
+  const ratingFilter = useRef(query.get('rating') || 'NA');
+  const languageFilter = useRef(query.get('language') || 'NA');
 
-  useEffect(() => {
-    setShowStatus('Upcomming movies')
-    fetch(`http://localhost:4000/search/NA/NA/NA`)
-    .then(response => response.json())
-    .then(list => setMovieList(list))
-  }, [])
+  useEffect(search, [])
 
   function search() {
     if (movieName.current === '') {
       window.history.replaceState(null, '', `/search`);
-      setMovieList([])
+      // setMovieList([])
+      setShowStatus('Upcoming movies')
+      fetch(`http://localhost:4000/search/NA/NA/NA`)
+        .then(response => response.json())
+        .then(list => setMovieList(list))
     } else {
-      window.history.replaceState(null, '', `/search/${movieName.current}`);
+      let searchParams = new URLSearchParams();
+      if (movieName.current && movieName.current !== 'NA') {
+        searchParams.set('keyword', movieName.current);
+      }
+      if (ratingFilter.current && ratingFilter.current !== 'NA' && ratingFilter.current !== 'Rating') {
+        searchParams.set('rating', ratingFilter.current);
+      }
+      if (languageFilter.current && languageFilter.current !== 'NA' && languageFilter.current !== 'Language') {
+        searchParams.set('language', languageFilter.current);
+      }
+
+      const queryString = searchParams.toString();
+
+
+      window.history.replaceState(null, '', `/search${queryString ? '?' + queryString : ''}`);
       setShowStatus('Search Result')
       fetch(`http://localhost:4000/search/${movieName.current}/${languageFilter.current}/${ratingFilter.current}`)
         .then(response => response.json())
