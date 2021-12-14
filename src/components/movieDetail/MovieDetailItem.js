@@ -336,7 +336,7 @@ const MovieDetailItem = ({movieId}) => {
                                    onChange={(event) =>
                                        setUserReviewTitle(event.target.value)}
                                    spellCheck="false" style={{"width": "50%", "fontSize": "small"}}/>
-                            <textarea placeholder="Wirte your review here!" className="mt-0 mb-0 form-control"
+                            <textarea placeholder="Write your review here!" className="mt-0 mb-0 form-control"
                                       value={userReview}
                                       aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                                       onChange={(event) =>
@@ -372,7 +372,7 @@ const MovieDetailItem = ({movieId}) => {
                                    onChange={(event) =>
                                        setUserArticleTitle(event.target.value)}
                                    spellCheck="false" style={{"width": "50%", "fontSize": "small"}}/>
-                            <textarea placeholder="Wirte your review here!" className="mt-0 mb-0 form-control"
+                            <textarea placeholder="Write your article here!" className="mt-0 mb-0 form-control"
                                       value={userArticle}
                                       aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                                       onChange={(event) =>
