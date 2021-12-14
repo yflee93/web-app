@@ -1,5 +1,6 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
+import {Link} from "react-router-dom";
 
 const ReviewList = ({reviews}) => {
     return(
@@ -10,7 +11,7 @@ const ReviewList = ({reviews}) => {
                         if (review){
                             return(
                                 <>
-                                    <div className="list-group-item content-list-group-item">
+                                    <Link to={`/profile/${review.author}`} className="list-group-item content-list-group-item">
                                         <div className="row ps-3">
                                             Rating: {review.rating}
                                         </div>
@@ -29,7 +30,7 @@ const ReviewList = ({reviews}) => {
                                         <div className="row ps-3">
                                             {review.content}
                                         </div>
-                                    </div>
+                                    </Link>
                                 </>
                             );
                         }

@@ -8,6 +8,7 @@ import {deleteCollection, addCollection} from "../../actions/collection";
 import {fetchMovieDetail} from "../../actions/movieDetail";
 import ReviewList from "./ReviewList";
 import ArticleList from "./ArticleList";
+import {Link} from "react-router-dom";
 
 const IMAGE_BASE_PATH_POSTER = 'https://image.tmdb.org/t/p/w300';
 const IMAGE_BASE_PATH_ACTOR = 'https://image.tmdb.org/t/p/w300';
@@ -143,6 +144,18 @@ const MovieDetailItem = ({movieId}) => {
                                     <i className="far fa-thumbs-up mt-3 ps-0"> Recommend </i>
                                 }
                             </div>}
+                            { !profiles &&
+                            <Link to={"/login"} className="row pt-4" style={{textDecoration: 'none', color: 'white'}}>
+                                <i className="far fa-heart ps-0"> Like </i>
+                            </Link>}
+                            { !profiles &&
+                            <Link to={"/login"} className="row" style={{ textDecoration: 'none', color: 'white'}}>
+                                <i className="far fa-bookmark mt-3 ps-0"> WatchList </i>
+                            </Link>}
+                            {!profiles &&
+                            <Link to={"/login"} className="row" style={{ textDecoration: 'none', color: 'white'}}>
+                                <i className="far fa-thumbs-up mt-3 ps-0"> Recommend </i>
+                            </Link>}
                         </div>
                     </div>
 

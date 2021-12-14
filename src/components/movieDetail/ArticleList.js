@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 const ArticleList = ({articles}) => {
     return(
@@ -9,14 +10,14 @@ const ArticleList = ({articles}) => {
                         if (article){
                             return(
                                 <>
-                                    <div className="list-group-item content-list-group-item">
+                                    <Link to={`/profile/${article.author}`} className="list-group-item content-list-group-item">
                                         <div className="row ps-3">
                                             Title: {article.title}
                                         </div>
                                         <div className="row ps-3">
                                             {article.content}
                                         </div>
-                                    </div>
+                                    </Link>
                                 </>
                             );
                         }
