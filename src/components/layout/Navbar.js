@@ -67,7 +67,7 @@ const Navbar = () => {
         <nav className="navbar navbar-expand navbar-dark wd-dark">
             <div className="container-fluid row">
                 <div className="col-3">
-                    <Link to="/" className="navbar-brand"><i className="fas fa-film"/>&#160;Movie Pal</Link>
+                    <Link to="/" className="navbar-brand"><i className="fas fa-film"/>&#160;Movie Hub</Link>
                 </div>
 
                 <div className="col-9">
