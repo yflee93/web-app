@@ -1,9 +1,11 @@
 import axios from 'axios';
 import {DELETE_REVIEW, PROFILE_ERROR, FETCH_REVIEW, CREATE_REVIEW} from "./constant";
 
-const URI = process.env.NODE_ENV === 'development' ?
-    'http://localhost:4000/api/review':
-    'https://web-app-final.herokuapp.com/api/review';
+// const URI = process.env.NODE_ENV === 'development' ?
+//     'http://localhost:4000/api/review':
+//     'https://web-app-final.herokuapp.com/api/review';
+
+const URI = 'http://localhost:4000/api/review'
 
 export const deleteReview = async (dispatch, review_id, movie_id, author_id) => {
     try {

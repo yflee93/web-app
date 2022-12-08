@@ -2,9 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useLocation } from 'react-router';
 import MovieIntro from './MovieIntro';
 
-const URI_PREFIX = process.env.NODE_ENV === 'development' ?
-    'http://localhost:4000':
-    'https://web-app-final.herokuapp.com';
+// const URI_PREFIX = process.env.NODE_ENV === 'development' ?
+//     'http://localhost:4000':
+//     'https://web-app-final.herokuapp.com';
+
+const URI_PREFIX = 'http://localhost:4000';
 
 function DropDown({ label, options, selectedValue, onValueChange }) {
     return <select defaultValue={selectedValue} style={{ width: 120, fontSize : 20 }} onChange={(event) => {

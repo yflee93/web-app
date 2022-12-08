@@ -5,9 +5,11 @@ const MOVIE_API = 'https://api.themoviedb.org/3/movie';
 const API_KEY = "6ecbcc32f1691bbd0ef5826095745798";
 const IMG_PREFIX = 'https://image.tmdb.org/t/p/w500';
 
-const URI = process.env.NODE_ENV === 'development' ?
-    'http://localhost:4000/api/profile':
-    'https://web-app-final.herokuapp.com/api/profile'
+// const URI = process.env.NODE_ENV === 'development' ?
+//     'http://localhost:4000/api/profile':
+//     'https://web-app-final.herokuapp.com/api/profile'
+
+const URI = 'http://localhost:4000/api/profile'
 
 export const fetchCollections = async (dispatch, favorite, bookmark, recommend) => {
     try {
