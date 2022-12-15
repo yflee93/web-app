@@ -57,6 +57,8 @@ const ShowInfoScreen = ({toggle, owns}) => {
                     <i className="fas fa-envelope"/> {profiles.user.email}</p>}
                 <p className="card-text text-center">
                     <i className="fas fa-map-marker-alt"/> {profiles.location}</p>
+                <p className="card-text text-center">
+                    <i className="fas fa-calendar-day"/> Since Dec. 2022</p>
                 <hr/>
                 <p className="text-center">{profiles.bio}</p>
                 {owns && (<div className="text-center mt-3">
