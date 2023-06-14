@@ -1,16 +1,13 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
-import {getProfiles} from "../../actions/profile";
 
 const ReviewersList = () => {
     const dispatch = useDispatch();
     const { isAuthenticated } = useSelector(state => state.auth);
     const {profiles} = useSelector(state => state.profiles);
     const navigate = useNavigate();
-    useEffect(()=> {
-        getProfiles(dispatch);
-    }, []);
+
     if (!isAuthenticated) {
         return (
             <div className="card">

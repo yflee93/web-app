@@ -1,20 +1,12 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
-import {getProfiles} from "../../actions/profile";
 
 const CommunityList = () => {
     const dispatch = useDispatch();
-    const {profiles} = useSelector(state => state.profiles);
     const navigate = useNavigate();
-    useEffect(()=> {
-        getProfiles(dispatch);
-    }, []);
 
     let community_list = [];
-    if (profiles) {
-        community_list = profiles.filter(profile => profile.user.type !== 'reviewer');
-    }
     return (
         <div className="mt-3">
             <ul className="list-group">
