@@ -75,21 +75,6 @@ export const getProfileById = async (dispatch, id) => {
     }
 }
 
-export const getProfiles = async (dispatch) => {
-    try {
-        const res = await axios.get(PROFILES_URI);
-        dispatch({
-            type: GET_PROFILES,
-            payload: res.data
-        })
-    } catch(err) {
-        dispatch({
-            type: PROFILE_ERROR,
-            payload: { msg: err.response.statusText, status: err.response.status }
-        })
-    }
-}
-
 export const clearProfile = dispatch => {
         dispatch({
             type: CLEAR_PROFILE,
