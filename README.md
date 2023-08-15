@@ -16,4 +16,4 @@ Link to discussion panels: https://docs.google.com/document/d/1MkRI5LKUvJ7id2OPC
 ##Design UML
 ![UML](https://github.com/yflee93/web-app/blob/main/Design.png?raw=true)
 
-[![Open in Monospace](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://localhost.corp.google.com:10443/new-git?url=https://github.com/yflee93/web-app.git&nix=false&type=web)
+[![Open in Monospace](https://www.gstatic.com/monospace/230815/openinprojectidx.png)](https://localhost.corp.google.com:10443/new-git?url=https://github.com/yflee93/web-app.git&nix=false&type=web)
