@@ -16,4 +16,15 @@ Link to discussion panels: https://docs.google.com/document/d/1MkRI5LKUvJ7id2OPC
 ##Design UML
 ![UML](https://github.com/yflee93/web-app/blob/main/Design.png?raw=true)
 
-[![Open in Monospace](https://www.gstatic.com/monospace/230815/openinprojectidx.png)](https://localhost.corp.google.com:10443/new-git?url=https://github.com/yflee93/web-app.git&nix=false&type=web)
+
+## Preview
+Open this web app with [Monospace](https://idx.google.com):
+
+<a href="https://localhost.corp.google.com:10443/new-git?url=https://github.com/yflee93/web-app.git&nix=false&type=web">
+  <img
+    alt="Open in Monospace"
+    src="https://www.gstatic.com/monospace/230815/openinprojectidx.png"
+    width="160"
+    height="32"
+  />
+</a>
